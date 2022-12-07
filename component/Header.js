@@ -8,44 +8,30 @@ function Header() {
     const closeMobileMenu = () => setClick(false);
     return (
         <div className='Header-con'>
-            <div className='Header'>
-                <div className='header-con'>
-                    <div className='header-logo'>
-                        <div className="logo-container">
-                            <Link href="/">ToDoList</Link>
-                        </div>
-                    </div>
-                    <div className='header-menu-con'>
-                        <div className="header-con">
-                            <ul className={click ? "menu active" : " menu"} >
-                                <li className="menu-link" onClick={closeMobileMenu}>
-                                    <Link href="/about">Goabout</Link>
-                                </li>
+        <div className="Header">
+            <div className="logo-container">
+                <Link href="/">ToDoList</Link>
+            </div>
+            <div className="header-con">
+                <ul className={click ? "menu active" : " menu"}>
+                    <li className="menu-link" onClick={closeMobileMenu}>
+                        <Link href="/register">Register</Link>
+                    </li>
+                    <li className="menu-link" onClick={closeMobileMenu}>
+                        <Link href="/login">Login</Link>
+                    </li>
 
-                                <li className="menu-link" onClick={closeMobileMenu}>
-                                    <Link href="/">GoIndex</Link>
-                                </li>
-                                <li className="menu-link" onClick={closeMobileMenu}>
-                                    <Link href="/register">Register</Link>
-                                </li>
-
-
-                            </ul>
-                        </div>
-                    </div>
-                </div>
+                </ul>
             </div>
             <div className="mobile-menu" onClick={handleClick}>
                 {click ? (
-
                     <FiX />
                 ) : (
                     <FiMenu />
                 )}
-
             </div>
         </div>
-
+        </div>
 
     )
 }
