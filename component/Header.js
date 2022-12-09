@@ -14,12 +14,16 @@ function Header() {
             </div>
             <div className="header-con">
                 <ul className={click ? "menu active" : " menu"}>
+                     <li className="menu-link" onClick={closeMobileMenu}>
+                        <Link href="/user/userdashboard">Dashboard</Link>
+                    </li>
                     <li className="menu-link" onClick={closeMobileMenu}>
                         <Link href="/register">Register</Link>
                     </li>
                     <li className="menu-link" onClick={closeMobileMenu}>
                         <Link href="/login">Login</Link>
                     </li>
+                   
 
                 </ul>
             </div>
