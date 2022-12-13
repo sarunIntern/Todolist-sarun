@@ -20,6 +20,14 @@ services:
 
     ports:
       - "5050:5050"
-
+  app:
+    container_name: demo_todolist:v1
+    build:
+        context: .
+        dockerfile: Dockerfile
+    ports:
+        - "3001:3000"
+    depends_on:
+        - postgres
 volumes:
   data:
