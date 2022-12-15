@@ -3,15 +3,15 @@ services:
   postgres:
     image: postgres:14
     restart: always
+    container_name: psql14
     environment:
-      - POSTGRES_USER=admin
-      - POSTGRES_PASSWORD=414424
-      - POSTGRES_DB=todolists
+      - POSTGRES_PASSWORD=4144
+      - POSTGRES_DB=todolistsdb
     ports:
       - '5432:5432'
     volumes:
-      - ./docker_postgres_init.sql:/docker-entrypoint-initdb.d/docker_postgres_init.sql
       - db_data:/var/lib/postgresql/data
+      - ./docker_postgres_init.sql:/docker-entrypoint-initdb.d/docker_postgres_init.sql
     networks:
       - pgsite
 
@@ -25,9 +25,30 @@ services:
       PGADMIN_DEFAULT_PASSWORD: "414424"
     ports:
       - '8080:80' 
+    volumes:
+      - pgadmin:/var/lib/pgadmin
+
+    networks:
+      - pgsite
+  web:
+    container_name: todolist-app
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    depends_on:
+      - postgres
+    ports:
+      - 3003:3000
+    environment:
+      POSTGRES_PORT: 5432
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 4144
+      POSTGRES_DB: todolistsdb
+      DATABASE_URL: postgres://postgres:4144d@psql14:5432/todolistsdb
     networks:
       - pgsite
 networks:
   pgsite:
 volumes:
   db_data:
+  pgadmin:

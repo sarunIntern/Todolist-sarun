@@ -15,13 +15,13 @@ function Header() {
             <div className="header-con">
                 <ul className={click ? "menu active" : " menu"}>
                      <li className="menu-link" onClick={closeMobileMenu}>
-                        <Link href="/user/userdashboard">Dashboard</Link>
+                        <Link href="/user/Userdashboard">Dashboard</Link>
                     </li>
                     <li className="menu-link" onClick={closeMobileMenu}>
-                        <Link href="/register">Register</Link>
+                        <Link href="/Register">Register</Link>
                     </li>
                     <li className="menu-link" onClick={closeMobileMenu}>
-                        <Link href="/login">Login</Link>
+                        <Link href="/Login">Login</Link>
                     </li>
                    
 
