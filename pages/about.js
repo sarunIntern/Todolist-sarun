@@ -1,7 +1,7 @@
 import React from "react";
 
 import Header from '../component/Header'
-function about() {
+function About() {
   return (
     <div>
     <Header/>
@@ -10,4 +10,4 @@ function about() {
   )
 }
 
-export default about
+export default About

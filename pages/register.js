@@ -1,23 +1,25 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 import Swal from 'sweetalert2'
-function register() {
-    const [value, setValue] = useState({})
+
+function Register() {
+   
+    const [Value, setValue] = useState({})
 
     const handleChange = (e) => {
         setValue({
-            ...value, [e.target.name]: e.target.value,
+            ...Value, [e.target.name]: e.target.value,
         })
     }
     function formsubmit(e) {
         e.preventDefault()
-        if (value.password !== value.conpassword) {
+        if (Value.password !== Value.conpassword) {
             Swal.fire({
                 icon: 'error',
                 title: 'Error!!',
                 text: 'password not match',
             })
         } else {
-            console.log(value)
+            console.log(Value)
             Swal.fire({
                 icon: 'success',
                 title: 'Success!!',
@@ -49,10 +51,6 @@ function register() {
                                 <label >Confirm-Password:</label>
                                 <input onChange={handleChange} className="form-control" type="password" name="conpassword" placeholder="Confirm Password" required />
                             </div>
-                            {/* <div class="form-check">
-                            <input type="checkbox" class="form-check-input" id="exampleCheck1" />
-                            <label class="form-check-label" for="exampleCheck1">Check me out</label>
-                        </div> */}
                             <div className='register-buttoncon'>
                                 <button type="submit" className="register-button">Submit</button>
                             </div>
@@ -64,4 +62,4 @@ function register() {
     )
 }
 
-export default register
+export default Register

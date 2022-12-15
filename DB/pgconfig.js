@@ -1,9 +1,13 @@
 const { Pool } = require("pg");
 
+var host = 'localhost'
+if(process.env.NODE_ENV == 'production'){
+    host = 'postgres14-con'
+}
 const pool = new Pool({
     user:process.env.POSTGRES_USER,
     password:process.env.POSTGRES_PASSWORD,
-    host:process.env.POSTGRES_HOST,
+    host:host,
     port:process.env.POSTGRES_PORT,
     database:process.env.POSTGRES_DATABASE,
 

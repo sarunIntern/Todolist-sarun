@@ -1,8 +1,8 @@
 FROM node:alpine3.15
- 
-COPY . .
 
-ENV PATH /app/node_modules/.bin:$PATH
+WORKDIR /app
+
+COPY . .
 
 RUN npm install
 

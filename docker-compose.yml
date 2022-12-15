@@ -1,33 +1,33 @@
-version: '3.9'
+version: '3.8'
 services:
   postgres:
     image: postgres:14
     restart: always
     environment:
-      - POSTGRES_USER = postgres
-      - POSTGRES_PASSWORD = 4144  
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=414424
+      - POSTGRES_DB= todolists
     ports:
-      -"5432:5432"
+      - '5432:5432'
     volumes:
-      - data:/var/lib/postgresql/data/
+      - ./docker_postgres_init.sql:/docker-entrypoint-initdb.d/docker_postgres_init.sql
+      - db_data:/var/lib/postgresql/data
+    networks:
+      - pgsite
 
-  pg-admin:
-    image: dpage/pgadmin4:6
-    environment:
-      - PGADMIN_DEFAULT_EMAIL=admin@email.com
-      - PGADMIN_DEFAULT_PASSWORD=admin
-      - PGADMIN_LISTEN_PORT=5050
-
-    ports:
-      - "5050:5050"
-  app:
-    container_name: demo_todolist:v1
-    build:
-        context: .
-        dockerfile: Dockerfile
-    ports:
-        - "3001:3000"
+  pgadmin-compose:
+    image: dpage/pgadmin4
+    restart: always
     depends_on:
-        - postgres
+      - postgres
+    environment: 
+      PGADMIN_DEFAULT_EMAIL: "admin@email.com"
+      PGADMIN_DEFAULT_PASSWORD: "414424"
+    ports:
+      - '8080:80' 
+    networks:
+      - pgsite
+networks:
+  pgsite:
 volumes:
-  data:
+  db_data:
