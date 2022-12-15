@@ -2,7 +2,7 @@ const { Pool } = require("pg");
 
 var host = 'localhost'
 if(process.env.NODE_ENV == 'production'){
-    host = 'postgres14-con'
+    host = 'postgres14'
 }
 const pool = new Pool({
     user:process.env.POSTGRES_USER,

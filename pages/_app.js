@@ -6,7 +6,6 @@ import "../styles/BG.css"
 import "../pages/index.css"
 import Header from '../component/Header'
 function MyApp({ Component, pageProps }) {
-
   return (
     <>
     <Header/>
