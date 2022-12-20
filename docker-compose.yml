@@ -44,7 +44,8 @@ services:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: 4144
       POSTGRES_DB: todolistsdb
-      DATABASE_URL: postgres://postgres:4144d@psql14:5432/todolistsdb
+      NEXT_PUBLIC_APP_API : http://127.0.0.1:3003/api
+      # DATABASE_URL: postgres://postgres:4144d@psql14:5432/todolistsdb
     networks:
       - pgsite
 networks:

@@ -1,5 +1,31 @@
-import React from 'react'
+import React, { useState } from 'react';
+import Swal from 'sweetalert2'
 function Login() {
+    const [Value, setValue] = useState({})
+
+    const handleChange = (e) => {
+        setValue({
+            ...Value, [e.target.name]: e.target.value,
+        })
+    }
+
+    function formsubmit(e) {
+        e.preventDefault()
+        if (Value.password !== Value.conpassword) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Error!!',
+                text: 'password not match',
+            })
+        } else {
+            console.log(Value)
+            Swal.fire({
+                icon: 'success',
+                title: 'Success!!',
+                text: 'Register complete',
+            })
+        }
+    }
     return (
         <div>
             <div className='login-con'>
@@ -9,14 +35,14 @@ function Login() {
                             Login
                         </div>
                     </div>
-                    <form>
+                    <form onSubmit={formsubmit}>
                         <div className="form-group">
                             <label >Email address</label>
-                            <input type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" required/>
+                            <input name='email' onChange={handleChange} type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" required />
                         </div>
                         <div className="form-group">
                             <label >Password</label>
-                            <input type="password" className="form-control" id="exampleInputPassword1" placeholder="Password" required/>
+                            <input name='password' onChange={handleChange} type="password" className="form-control" id="exampleInputPassword1" placeholder="Password" required/>
                         </div>
                         {/* <div class="form-check">
                             <input type="checkbox" class="form-check-input" id="exampleCheck1" />

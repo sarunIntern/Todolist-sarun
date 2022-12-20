@@ -8,6 +8,6 @@ COPY . .
 
 ENV PATH /app/node_modules/.bin:$PATH
 
-RUN npm install
+RUN npm install -Y
 
 CMD ["npm", "run", "production"]

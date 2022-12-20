@@ -2,14 +2,13 @@ import React, { useState } from 'react';
 import Swal from 'sweetalert2'
 
 function Register() {
-   
     const [Value, setValue] = useState({})
-
     const handleChange = (e) => {
         setValue({
             ...Value, [e.target.name]: e.target.value,
         })
     }
+
     function formsubmit(e) {
         e.preventDefault()
         if (Value.password !== Value.conpassword) {
@@ -19,7 +18,7 @@ function Register() {
                 text: 'password not match',
             })
         } else {
-            console.log(Value)
+            
             Swal.fire({
                 icon: 'success',
                 title: 'Success!!',
@@ -27,6 +26,7 @@ function Register() {
             })
         }
     }
+
     return (
         <>
             <div className='register-con'>
