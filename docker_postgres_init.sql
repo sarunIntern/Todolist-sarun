@@ -10,7 +10,7 @@ CREATE TABLE users (
 	user_password VARCHAR ( 50 ) NOT NULL,
 	user_email VARCHAR ( 255 ) UNIQUE NOT NULL,
 	user_status BOOLEAN NOT NULL DEFAULT 'false', 
-	user_role CHAR(1) NOT NULL,
+	user_role CHAR(1) NOT NULL DEFAULT 'u',
 	user_created_on timestamp with time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
     last_login timestamp with time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
 	PRIMARY KEY(user_id)

@@ -6,6 +6,7 @@ function Header() {
     const [click, setClick] = useState(false);
     const handleClick = () => setClick(!click);
     const closeMobileMenu = () => setClick(false);
+    
     return (
         <div className='Header-con'>
         <div className="Header">

@@ -1,7 +1,6 @@
 import React,{useEffect,useState}from 'react'
 import { listuser } from '../../../function/User'
-
-
+import axios from 'axios'
 function Admindashboard({posts}) {
   console.log(posts)
   // const [value, setValue] = useState([]);
@@ -16,14 +15,15 @@ function Admindashboard({posts}) {
   //   }).catch(err => {
   //     console.log(err.response.data)
   //   })
-    
   // };
   function handleChangeRole(e,user_id){
     const value = {
-      role_id:user_id
+      role_id:user_id,
+      role:e.target.value
     }
+    console.log(value)
   }
-  const roleData = ["admin", "user"];
+  const roleData = ["a", "u"];
   return (
     <div className="admindashboard-container">
       <div className="admindashboard-card">
@@ -54,12 +54,13 @@ function Admindashboard({posts}) {
                     : <td>false</td>
 
                   }
-                  {item.role === 'admin'
+                  <td>
+                  {item.user_role === 'a'
                       ?
                       <select
                         className="form-select"
                         style={{ width: "100px", backgroundColor: "lightgreen" }}
-                        defaultValue={item.role}
+                        defaultValue={item.user_role}
                         onChange={e => handleChangeRole(e, item.user_id)}
                       >
                         {roleData.map((item, index) =>
@@ -69,10 +70,11 @@ function Admindashboard({posts}) {
                         )}
 
                       </select>
-                      : <select
+                      : (
+                      <select
                         className="form-select"
                         style={{ width: "100px", backgroundColor: "lightskyblue" }}
-                        defaultValue={item.role}
+                        defaultValue={item.user_role}
                         onChange={e => handleChangeRole(e, item.user_id)}
                       >
                         {roleData.map((item, index) =>
@@ -82,7 +84,9 @@ function Admindashboard({posts}) {
                         )}
 
                       </select>
+                      )
                     }
+                    </td>
                   <td>{item.user_created_on}</td>
                   <td>{item.last_login}</td>
                 </tr>
@@ -95,12 +99,12 @@ function Admindashboard({posts}) {
   )
 }
 export async function getServerSideProps() {
-  // const result = await fetch('http://127.0.0.1:3000/api/user')
-  const result = await listuser()
-  // const result = await axios.get('http://localhost:8000/Person/person')
+  // const result = await fetch('http://127.0.0.1:3000/api/usersapi/user')
+  // const result = await listuser()
+  // const result = await axios.get('http://127.0.0.1:3000/api/usersapi/user')
   // const result = await fetch('https://jsonplaceholder.typicode.com/posts')
   // const result = await hello()
-  // const result = await listuser()
+  const result = await listuser()
   // const res = await fetch('https://final-ccna-backend.vercel.app/Category/category');
   const posts = await result.data
 

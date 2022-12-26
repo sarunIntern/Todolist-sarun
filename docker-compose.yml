@@ -30,6 +30,17 @@ services:
 
     networks:
       - pgsite
+
+  mailhog:
+    container_name: mailhog
+    image: mailhog/mailhog:latest
+    restart: always
+    ports:
+      - 1025:1025
+      - 8025:8025
+    networks:
+      - pgsite
+
   web:
     container_name: todolist-app
     build:
@@ -38,13 +49,14 @@ services:
     depends_on:
       - postgres
     ports:
-      - 3003:3000
+      - 3000:3000
     environment:
       POSTGRES_PORT: 5432
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: 4144
       POSTGRES_DB: todolistsdb
-      NEXT_PUBLIC_APP_API : http://127.0.0.1:3003/api
+      NEXT_PUBLIC_APP_API: http://127.0.0.1:3000/api
+      NEXT_PUBLIC_APP_APIIN: http://localhost:3000/api
       # DATABASE_URL: postgres://postgres:4144d@psql14:5432/todolistsdb
     networks:
       - pgsite

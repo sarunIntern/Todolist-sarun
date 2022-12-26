@@ -96,10 +96,30 @@
   cursor: pointer;
   outline: none;
 }
+.register-button-dis {
+  padding: 1.3em 3em;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 2.5px;
+  font-weight: 500;
+  color: #000;
+  background-color: rgb(79, 79, 79);
+  /* box-shadow: 0px 5px 10px rgb(157, 159, 161); */
+  border: none;
+  border-radius: 45px;
+  transition: all 0.3s ease 0s;
+  outline: none;
+}
 
 .register-button:hover {
   background-color: #23c483;
   box-shadow: 0px 15px 20px rgba(46, 229, 157, 0.4);
+  color: #fff;
+  transform: translateY(-6px);
+}
+.register-button-dis:hover {
+  background-color: #eb4646;
+  box-shadow: 0px 15px 20px rgba(212, 91, 91, 0.4);
   color: #fff;
   transform: translateY(-6px);
 }

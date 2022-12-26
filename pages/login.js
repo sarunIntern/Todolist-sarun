@@ -1,30 +1,37 @@
 import React, { useState } from 'react';
 import Swal from 'sweetalert2'
+import { login } from '../function/Auth/Auth'
+import Toast from '../Alert/Success'
 function Login() {
     const [Value, setValue] = useState({})
-
+    const [Data, setData] = useState({})
+    console.log(Data)
     const handleChange = (e) => {
         setValue({
             ...Value, [e.target.name]: e.target.value,
         })
     }
-
     function formsubmit(e) {
         e.preventDefault()
-        if (Value.password !== Value.conpassword) {
-            Swal.fire({
-                icon: 'error',
-                title: 'Error!!',
-                text: 'password not match',
-            })
-        } else {
-            console.log(Value)
-            Swal.fire({
-                icon: 'success',
-                title: 'Success!!',
-                text: 'Register complete',
-            })
-        }
+            login(Value).then((res) => {
+                    Toast.fire({
+                        position: 'top-end',
+                        icon: 'success',
+                        title: 'Login success!!'
+                    })
+                    setData(res.data)
+            }).catch((err) => {
+                Swal.fire({
+                    position: 'top',
+                    title: 'Error!',
+                    text: err.response.data,
+                    icon: 'error',
+                    iconColor: 'Red',
+                    confirmButtonColor: '#3085d6',
+                    confirmButtonText: 'ตกลง'
+                })
+                console.log(err)
+            });
     }
     return (
         <div>
@@ -42,14 +49,14 @@ function Login() {
                         </div>
                         <div className="form-group">
                             <label >Password</label>
-                            <input name='password' onChange={handleChange} type="password" className="form-control" id="exampleInputPassword1" placeholder="Password" required/>
+                            <input name='password' onChange={handleChange} type="password" className="form-control" id="exampleInputPassword1" placeholder="Password" required />
                         </div>
                         {/* <div class="form-check">
                             <input type="checkbox" class="form-check-input" id="exampleCheck1" />
                             <label class="form-check-label" for="exampleCheck1">Check me out</label>
                         </div> */}
                         <div className='register-buttoncon'>
-                        <button type="submit" className="register-button">Submit</button>
+                            <button type="submit" className="register-button">Submit</button>
                         </div>
                     </form>
                 </div>
@@ -57,5 +64,4 @@ function Login() {
         </div>
     )
 }
-
 export default Login

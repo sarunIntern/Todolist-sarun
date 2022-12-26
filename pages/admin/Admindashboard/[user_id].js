@@ -3,7 +3,7 @@ import axios from 'axios'
 import { listuserID } from '../../../function/User'
 import { useRouter } from 'next/router'
 function AdmindashboardDetail2({ posts }) {
-  
+  console.log(posts)
   return (
     <div className="admindashboard-container">
       <div className="admindashboard-card">
@@ -26,7 +26,7 @@ function AdmindashboardDetail2({ posts }) {
             </thead>
             <tbody>
               {posts.map((item, index) =>
-                <tr>
+                <tr key={index}>
                   <th>1</th>
                   <td>{item.user_id}</td>
                   <td>{item.user_email}</td>
@@ -50,7 +50,7 @@ function AdmindashboardDetail2({ posts }) {
 
 export async function getServerSideProps(context) {
   const { params } = context
-  const result = await axios.get('http://127.0.0.1:3000/api/usersapi/' + params.user_id)
+  const result = await listuserID(params.user_id)
   // const result = await listuserID(params.id)
   const posts = await result.data
   return {
