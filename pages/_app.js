@@ -5,6 +5,7 @@ import "../pages/login.css"
 import "../styles/BG.css"
 import "../pages/index.css"
 import "../pages/admin/Admindashboard.css"
+import "../pages/verifycation/Loadingpage.css"
 import Header from '../components/Header'
 function MyApp({ Component, pageProps }) {
   return (

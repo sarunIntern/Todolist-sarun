@@ -1,21 +1,7 @@
-import React,{useEffect,useState}from 'react'
+import React from 'react'
 import { listuser } from '../../../function/User'
-import axios from 'axios'
 function Admindashboard({posts}) {
   console.log(posts)
-  // const [value, setValue] = useState([]);
-  // useEffect(() => {
-  //   // service call to load the videos
-  //   loadData();
-  // }, []);
-  
-  // const loadData = async () => {
-  //   listuser().then(res => {
-  //     setValue(res.data)
-  //   }).catch(err => {
-  //     console.log(err.response.data)
-  //   })
-  // };
   function handleChangeRole(e,user_id){
     const value = {
       role_id:user_id,

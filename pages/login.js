@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import Swal from 'sweetalert2'
 import { login } from '../function/Auth/Auth'
 import Toast from '../Alert/Success'
+import { requesttoken } from '../function/Auth/Auth';
+import axios from 'axios';
 function Login() {
     const [Value, setValue] = useState({})
     const [Data, setData] = useState({})
@@ -20,6 +22,7 @@ function Login() {
                         title: 'Login success!!'
                     })
                     setData(res.data)
+                   
             }).catch((err) => {
                 Swal.fire({
                     position: 'top',
@@ -32,6 +35,10 @@ function Login() {
                 })
                 console.log(err)
             });
+    }
+    const showToken  = async() => {
+        const user = await requesttoken()
+        console.log(user.data)
     }
     return (
         <div>
@@ -58,7 +65,11 @@ function Login() {
                         <div className='register-buttoncon'>
                             <button type="submit" className="register-button">Submit</button>
                         </div>
+                        
                     </form>
+                    <div className='register-buttoncon'>
+                            <button  className="register-button" onClick={showToken}>Token</button>
+                        </div>
                 </div>
             </div>
         </div>

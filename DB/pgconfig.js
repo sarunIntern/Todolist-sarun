@@ -1,13 +1,13 @@
 const {Client,Pool } = require("pg");
 
 var host = 'localhost'
-if(process.env.NODE_ENV == 'production'){
-    host = 'psql14'
-}
+// if(process.env.NODE_ENV == 'production'){
+//     host = 'psql14'
+// }
 const pool = new Pool({
     user:process.env.POSTGRES_USER,
     password:process.env.POSTGRES_PASSWORD,
-    host:host,
+    host:process.env.POSTGRES_HOST,
     port:process.env.POSTGRES_PORT,
     database:process.env.POSTGRES_DATABASE,
 })
