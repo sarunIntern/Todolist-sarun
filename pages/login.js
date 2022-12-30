@@ -3,10 +3,11 @@ import Swal from 'sweetalert2'
 import { login } from '../function/Auth/Auth'
 import Toast from '../Alert/Success'
 import { requesttoken } from '../function/Auth/Auth';
-import axios from 'axios';
+import { useRouter } from 'next/router';
 function Login() {
     const [Value, setValue] = useState({})
     const [Data, setData] = useState({})
+    const router = useRouter()
     console.log(Data)
     const handleChange = (e) => {
         setValue({
@@ -22,7 +23,8 @@ function Login() {
                         title: 'Login success!!'
                     })
                     setData(res.data)
-                   
+                    location.reload();
+                    router.replace('/')
             }).catch((err) => {
                 Swal.fire({
                     position: 'top',

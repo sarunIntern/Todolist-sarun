@@ -12,5 +12,8 @@ export const verifycation= async (id) =>
 export const login= async (value) =>
   await axios.post(process.env.NEXT_PUBLIC_APP_APIIN+ "/auth/login", value);
 
+export const logout = async () =>
+  await axios.get(process.env.NEXT_PUBLIC_APP_APIIN+ "/auth/logout");
+
 export const requesttoken= async () =>
   await axios.get(process.env.NEXT_PUBLIC_APP_APIIN+ "/auth/requesttoken");
