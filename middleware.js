@@ -1,6 +1,5 @@
 import { NextResponse } from "next/server";
 
-
 //  jose ใช้แทน jwt ได้
 const jose = require('jose')
 //อันนี้ jwt Error
