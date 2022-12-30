@@ -16,9 +16,9 @@ export default async function middleware(req) {
             try {
                 const username = payload.role
                 if (username !== 'a') {
-                    return NextResponse.next()
+                    console.log("You are Admin ",payload)
                 } else {
-                    console.log("ERRor")
+                    console.log("You are not Admin na")
                 }
             } catch (err) {
                 console.log(err);
