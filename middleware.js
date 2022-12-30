@@ -16,7 +16,7 @@ export default async function middleware(req) {
                 //ตัวนี้คือไม่มี Token ให้้ย้ายไปหน้า Login
                 return NextResponse.redirect('http://localhost:3000/Login')
             } else {
-                //jose verify Token
+                //ใช้ jose แทน jwt /// jose verify Token
                 const { payload } = await jose.jwtVerify(cookies, new TextEncoder().encode(process.env.SECRET_TOKEN));
                 try {
                     const username = payload.role
@@ -32,6 +32,7 @@ export default async function middleware(req) {
             }
         }
 }
+//ตัวกรอง middleware ให้ทำงานบน path ที่เรากำหนดเฉาะได้
 export const config = {
     matcher: '/api/hello',
 }
