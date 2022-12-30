@@ -16,4 +16,4 @@ export const logout = async () =>
   await axios.get(process.env.NEXT_PUBLIC_APP_APIIN+ "/auth/logout");
 
 export const requesttoken= async () =>
-  await axios.get(process.env.NEXT_PUBLIC_APP_APIIN+ "/auth/requesttoken");
+  await axios.get(process.env.NEXT_PUBLIC_APP_APIIN+ "/requesttoken");

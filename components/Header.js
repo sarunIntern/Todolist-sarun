@@ -7,14 +7,14 @@ import Toast from '../Alert/Success';
 // import Cookies from 'js-cookie'
 function Header() {
     const [click, setClick] = useState(false);
-    const [Data, setData] = useState();
+    const [Data, setData] = useState({});
     const handleClick = () => setClick(!click);
     const closeMobileMenu = () => setClick(false);
     const router = useRouter()
     useEffect(() => {
         gettoken()
     }, []);
-    // console.log(Data)
+    console.log(Data)
     function gettoken() {
         requesttoken().then(res => {
             setData(res.data)
