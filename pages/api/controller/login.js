@@ -31,6 +31,7 @@ export default async function login(req, res) {
                             maxAge: 60 * 60 * 24 * 7 ,
                             path:"/",  // 1 week
                           }));
+                     
                         res.status(200).json({ token, payload });
                     });
                     

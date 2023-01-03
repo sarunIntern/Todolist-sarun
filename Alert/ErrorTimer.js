@@ -9,7 +9,7 @@ const Error = Swal.mixin({
           Swal.showLoading()
           const b = Swal.getHtmlContainer().querySelector('b')
           timerInterval = setInterval(() => {
-            b.textContent = Swal.getTimerLeft()
+            b.textContent = ((Swal.getTimerLeft())/1000)
           }, 100)
         },
         willClose: () => {

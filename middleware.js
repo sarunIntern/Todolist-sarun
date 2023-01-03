@@ -10,10 +10,11 @@ export default async function middleware(req) {
 
     const url = req.url;
     //ดักที่ตัว api/hello
-        if (url.includes('/api/hello')) {
+        if (url.includes('/admin')) {
             if (!cookies) {
                 //ตัวนี้คือไม่มี Token ให้้ย้ายไปหน้า Login
-                return NextResponse.redirect('http://localhost:3000/Login')
+               
+                return NextResponse.redirect('http://localhost:3000/verifycation/Redirect')
             } else {
                 //ใช้ jose แทน jwt /// jose verify Token
                 const { payload } = await jose.jwtVerify(cookies, new TextEncoder().encode(process.env.SECRET_TOKEN));
@@ -22,16 +23,37 @@ export default async function middleware(req) {
                     if (username === 'a') {
                         console.log("You are Admin ",payload)
                     } else {
-                        console.log("You are not Admin na" ,payload)
+                        return NextResponse.redirect('http://localhost:3000/verifycation/Redirect')
                     }
                 } catch (err) {
                     console.log(err);
-                    res.status(401).send("Role Admin ไม่ถูกต้อง ");
+                    res.status(401).send("Error Admin");
+                }
+            }
+        }
+        if (url.includes('/api')) {
+            if (!cookies) {
+                //ตัวนี้คือไม่มี Token ให้้ย้ายไปหน้า Login
+               
+                return NextResponse.redirect('http://localhost:3000/verifycation/Redirect')
+            } else {
+                //ใช้ jose แทน jwt /// jose verify Token
+                const { payload } = await jose.jwtVerify(cookies, new TextEncoder().encode(process.env.SECRET_TOKEN));
+                try {
+                    const username = payload.role
+                    if (username === 'a') {
+                        console.log("You are Admin ",payload)
+                    } else {
+                        return NextResponse.redirect('http://localhost:3000/verifycation/Redirect')
+                    }
+                } catch (err) {
+                    console.log(err);
+                    res.status(401).send("Error Admin");
                 }
             }
         }
 }
-//ตัวกรอง middleware ให้ทำงานบน path ที่เรากำหนดเฉาะได้
+//ตัวกรอง middleware ให้ทำงานบน path ที่เรากำหนดเฉพาะได้
 export const config = {
-    matcher: '/api/hello',
+    matcher: ['/admin/:path*'],
 }

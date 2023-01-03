@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Swal from 'sweetalert2'
 import { register, contact } from '../function/Auth/Auth';
 import Toast from '../Alert/Success'
+
 function Register() {
     const [Value, setValue] = useState({})
     const [Load, setLoad] = useState(false)
@@ -41,7 +42,7 @@ function Register() {
                     Swal.fire({
                         position: 'top',
                         title: 'Error!',
-                        text: errs.response,
+                        text: errs.response.data,
                         icon: 'error',
                         iconColor: 'Red',
                         confirmButtonColor: '#3085d6',

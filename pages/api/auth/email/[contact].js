@@ -42,7 +42,7 @@ export default async (req, res) => {
       text: `<h1>This is the email content</h1></br>
       <h1>You have a contact form submission ${username} !!</h1><br>
                  <p><strong>Email: </strong> ${email}</p><br>
-              <h1>id is : ${contact}</h1>  
+                 <h1><a href='http://localhost:3000/verifycation/${contact}'>Click</a></h1>
       `,
     });
     return res.status(200).json("Email sender SUCCESS!!");

@@ -3,18 +3,17 @@ import Swal from 'sweetalert2'
 import { login } from '../function/Auth/Auth'
 import Toast from '../Alert/Success'
 import { requesttoken } from '../function/Auth/Auth';
-import { useRouter } from 'next/router';
+import { useRouter } from "next/navigation";
 function Login() {
     const [Value, setValue] = useState({})
-    const [Data, setData] = useState({})
+ 
     const router = useRouter()
-    console.log(Data)
     const handleChange = (e) => {
         setValue({
             ...Value, [e.target.name]: e.target.value,
         })
     }
-    function formsubmit(e) {
+   async function formsubmit(e) {
         e.preventDefault()
             login(Value).then((res) => {
                     Toast.fire({
@@ -22,9 +21,9 @@ function Login() {
                         icon: 'success',
                         title: 'Login success!!'
                     })
-                    setData(res.data)
-                    location.reload();
+                    router.refresh()
                     router.replace('/')
+                   
             }).catch((err) => {
                 Swal.fire({
                     position: 'top',

@@ -1,14 +1,16 @@
 import React from 'react'
 import { listuser } from '../../../function/User'
+import * as moment from 'moment';
 function Admindashboard({posts}) {
-  console.log(posts)
-  function handleChangeRole(e,user_id){
+
+  function handleChangeRole(e,user_id){ 
     const value = {
       role_id:user_id,
       role:e.target.value
     }
     console.log(value)
   }
+  
   const roleData = ["a", "u"];
   return (
     <div className="admindashboard-container">
@@ -73,8 +75,8 @@ function Admindashboard({posts}) {
                       )
                     }
                     </td>
-                  <td>{item.user_created_on}</td>
-                  <td>{item.last_login}</td>
+                  <td>{moment(item.user_created_on).format("lll")}</td>
+                  <td>{moment(item.last_login).format("lll")}</td>
                 </tr>
               )}
             </tbody>
