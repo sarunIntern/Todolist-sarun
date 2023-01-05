@@ -44,7 +44,7 @@ export default async function login(req, res) {
         }
     } catch (err) {
         // console.log(err)
-        res.status(500).send("serverERROR")
+        res.status(500).send("LOGIN SERVER ERROR !!!")
     }
 }
 

@@ -68,9 +68,9 @@ function Login() {
                         </div>
                         
                     </form>
-                    <div className='register-buttoncon'>
+                    {/* <div className='register-buttoncon'>
                             <button  className="register-button" onClick={showToken}>Token</button>
-                        </div>
+                        </div> */}
                 </div>
             </div>
         </div>

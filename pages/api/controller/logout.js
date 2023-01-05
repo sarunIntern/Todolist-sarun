@@ -18,7 +18,7 @@ export default async function logout (req,res){
         
     } catch (err) {
         // console.log(err)
-        res.status(500).send("serverERROR")
+        res.status(500).send("LOGOUT SERVER ERROR !!!")
     }
 
 }

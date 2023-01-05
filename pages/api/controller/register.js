@@ -23,7 +23,7 @@ export default async function register(req, res) {
         }
     } catch (err) {
         console.log(err)
-        res.status(500).send("serverError")
+        res.status(500).send("REGISTER SERVER ERROR !!!")
     }
 }
 

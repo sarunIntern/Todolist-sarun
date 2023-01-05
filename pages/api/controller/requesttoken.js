@@ -12,6 +12,6 @@ export default async function requesttoken(req,res){
         
     } catch (err) {
         // console.log(err)
-        res.status(500).send("serverERROR")
+        res.status(500).send("REQUESTIONTOKEN SERVER ERROR !!!")
     }
 }

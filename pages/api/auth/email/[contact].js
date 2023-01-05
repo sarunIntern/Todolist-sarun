@@ -47,6 +47,6 @@ export default async (req, res) => {
     });
     return res.status(200).json("Email sender SUCCESS!!");
   } catch (err) {
-    res.status(500).send("serverERROR")
+    res.status(500).send("EMAIL SENDER SERVER ERROR !!!")
   }
 }
