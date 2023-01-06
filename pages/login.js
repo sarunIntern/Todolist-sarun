@@ -3,7 +3,7 @@ import Swal from 'sweetalert2'
 import { login } from '../function/Auth/Auth'
 import Toast from '../Alert/Success'
 import { requesttoken } from '../function/Auth/Auth';
-import { useRouter } from "next/navigation";
+import { useRouter } from "next/router";
 function Login() {
     const [Value, setValue] = useState({})
  
@@ -21,7 +21,7 @@ function Login() {
                         icon: 'success',
                         title: 'Login success!!'
                     })
-                    router.refresh()
+                    router.reload()
                     router.replace('/')
                    
             }).catch((err) => {

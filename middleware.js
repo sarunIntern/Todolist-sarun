@@ -10,50 +10,67 @@ export default async function middleware(req) {
 
     const url = req.url;
     //ดักที่ตัว /admin
-        if (url.includes('/admin')) {
-            if (!cookies) {
-                //ตัวนี้คือไม่มี Token ให้้ย้ายไปหน้า Login
-               
-                return NextResponse.redirect('http://localhost:3000/Loadtoredirect')
-            } else {
+    if (url.includes('/admin')) {
+        if (!cookies) {
+            //ตัวนี้คือไม่มี Token ให้้ย้ายไปหน้า Login
+
+            return NextResponse.redirect('http://localhost:3000/Loadtoredirect')
+        } else {
+            try {
                 //ใช้ jose แทน jwt /// jose verify Token
                 const { payload } = await jose.jwtVerify(cookies, new TextEncoder().encode(process.env.SECRET_TOKEN));
-                try {
-                    const username = payload.role
-                    if (username === 'a') {
-                        console.log("You are Admin ",payload)
-                    } else {
-                        return NextResponse.redirect('http://localhost:3000/Loadtoredirect')
-                    }
-                } catch (err) {
-                    console.log(err);
-                    res.status(401).send("Error Admin");
+                const role = payload.role
+                if (role === 'a') {
+                    console.log("You are Admin ", payload)
+                } else {
+                    return NextResponse.redirect('http://localhost:3000/Loadtoredirect')
                 }
+            } catch (err) {
+                console.log(err);
+                return NextResponse.redirect('http://localhost:3000/Loadtoredirect2')
             }
         }
-        //ป้องกัน API ของ Role Admin
-        if (url.includes('/api/auth/Admin')) {
-            if (!cookies) {
-                //ตัวนี้คือไม่มี Token ให้้ย้ายไปหน้า Login
-                return NextResponse.redirect('http://localhost:3000/Loadtoredirect')
-            } else {
+    }
+    //ป้องกัน API ของ Role Admin
+    if (url.includes('/api/auth/Admin')) {
+        if (!cookies) {
+            //ตัวนี้คือไม่มี Token ให้้ย้ายไปหน้า Login
+            return NextResponse.redirect('http://localhost:3000/Loadtoredirect')
+        } else {
+            try {
                 //ใช้ jose แทน jwt /// jose verify Token
                 const { payload } = await jose.jwtVerify(cookies, new TextEncoder().encode(process.env.SECRET_TOKEN));
-                try {
-                    const username = payload.role
-                    if (username === 'a') {
-                        console.log("You are Admin ",payload)
-                    } else {
-                        return NextResponse.redirect('http://localhost:3000/verifycation/Redirect')
-                    }
-                } catch (err) {
-                    console.log(err);
-                    res.status(401).send("Error Admin");
+                const role = payload.role
+                if (role === 'a') {
+                    console.log("You are Admin ", payload)
+                } else {
+                    return NextResponse.redirect('http://localhost:3000/verifycation/Redirect')
                 }
+            } catch (err) {
+                console.log(err);
+                return NextResponse.redirect('http://localhost:3000/Loadtoredirect2')
             }
         }
+    }
+    //ดักที่ตัว /admin
+    if (url.includes('/user')) {
+        if (!cookies) {
+            //ตัวนี้คือไม่มี Token ให้้ย้ายไปหน้า Login
+            return NextResponse.redirect('http://localhost:3000/Loadtoredirect')
+        } else {
+            try {
+                //ใช้ jose แทน jwt /// jose verify Token
+                const { payload } = await jose.jwtVerify(cookies, new TextEncoder().encode(process.env.SECRET_TOKEN));
+                const user_id = await payload.user_id
+                req.user_id = await user_id
+            } catch (err) {
+                console.log(err);
+                return NextResponse.redirect('http://localhost:3000/Loadtoredirect2')
+            }
+        }
+    }
 }
 //ตัวกรอง middleware ให้ทำงานบน path ที่เรากำหนดเฉพาะได้
 export const config = {
-    matcher: ['/admin/:path*','/api/auth/Admin:path*'],
+    matcher: ['/admin/:path*', '/api/auth/Admin:path*','/user/:path*'],
 }

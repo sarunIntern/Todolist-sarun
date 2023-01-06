@@ -7,6 +7,12 @@
     margin-top: 20px;
     padding: 10px;
     
+}
+
+.admidashboard-sub-container {
+    display: block;
+    width: 96%;
+    /* background-color: aqua; */
 
 }
 
@@ -14,7 +20,7 @@
     justify-content: center;
     border-radius: 10px;
     /* height: 80rem; */
-    width: 96%;
+    width: 100%;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 5px;
     overflow: hidden;
     overflow-y: auto;
@@ -29,6 +35,7 @@
     text-shadow: 2px 2px rgb(226, 197, 66);
     padding-left: 16px;
     border-radius: 5px;
+    letter-spacing: 1px;
 }
 
 .admindashboard-card-content {
@@ -37,10 +44,233 @@
     border-radius: 5px;
     padding: 10px;
 }
-.admin-thead-con{
+
+.admin-thead-con {
     background-color: rgb(90, 214, 156);
     opacity: 0.9;
     /* box-shadow: rgb(117, 222, 173) 0px 0px 10px; */
     font-size: 18px;
-   
+
+}
+
+.admindashboard-function {
+    display: flex;
+    justify-content: space-between;
+    /* background-color: rgb(18, 118, 207); */
+    width: 60%;
+}
+
+.admindashboard-function-con {
+    /* background-color: rgb(84, 207, 18); */
+    margin-right: 5px;
+
+}
+
+.admindashboard-user-sub-container {
+    /* background-color: azure; */
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+    padding: 20px;
+}
+
+.admindashboard-usercount {
+    height: auto;
+    width: 500px;
+    background-color: rgb(255, 255, 255);
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 5px;
+    border-radius: 10px;
+    margin: 2px;
+    display: block;
+    padding-bottom: 10px;
+}
+
+.admindashboard-usercard-header {
+    background-color: rgb(90, 214, 156);
+    margin: 4px;
+    box-shadow: rgba(90, 214, 156, 0.709) 0px 5px 5px;
+    color: rgb(252, 252, 252);
+    width: 100;
+    font-weight: 600;
+    text-shadow: 2px 2px rgb(12, 13, 12);
+    padding-left: 16px;
+    border-radius: 5px;
+}
+
+.admindashboard-usercard-subheader {
+    display: flex;
+    justify-content: center;
+
+}
+
+.admindashboard-usercard-header-part-verify {
+    margin: 2px;
+    font-size: 60px;
+    width: 100%;
+    text-align: center;
+    color: rgb(76, 212, 146);
+    border-radius: 10px;
+    background-color: rgb(247, 247, 247);
+
+}
+
+.admindashboard-usercard-header-part-user {
+    margin: 2px;
+    font-size: 60px;
+    width: 100%;
+    text-align: center;
+    color: rgb(255, 174, 0);
+    border-radius: 10px;
+    background-color: rgb(247, 247, 247);
+
+}
+
+.admindashboard-usercard-header-part-admin {
+    margin: 2px;
+    font-size: 60px;
+    width: 100%;
+    background-color: rgb(247, 247, 247);
+    text-align: center;
+    border-radius: 10px;
+    color: rgb(46, 39, 3);
+}
+
+
+.admindashboard-usercard-sub-header-two-admin {
+    margin: 2px;
+    border-radius: 5px;
+    text-align: center;
+    font-size: 25px;
+    width: 100%;
+    padding-left: 10px;
+    padding-right: 10px;
+    text-align: center;
+    color: rgb(252, 252, 252);
+    text-shadow: 2px 2px rgb(12, 13, 12);
+    background-color: rgb(229, 187, 97);
+    box-shadow: rgba(214, 160, 90, 0.709) 0px 5px 15px;
+    height: auto;
+}
+
+.admindashboard-usercard-sub-header-two-user {
+    margin: 2px;
+    border-radius: 5px;
+    text-align: center;
+    font-size: 25px;
+    height: auto;
+    width: 100%;
+    padding-left: 10px;
+    padding-right: 10px;
+    text-align: center;
+    color: rgb(252, 252, 252);
+    text-shadow: 2px 2px rgb(12, 13, 12);
+    background-color: rgb(97, 229, 167);
+    box-shadow: rgba(90, 214, 156, 0.709) 0px 5px 15px;
+}
+
+.admindashboard-usercard-sub-header-two-verify-true {
+    margin: 2px;
+    height: auto;
+    border-radius: 5px;
+    text-align: center;
+    font-size: 25px;
+    width: 100%;
+    padding-left: 10px;
+    padding-right: 10px;
+    text-align: center;
+    color: rgb(252, 252, 252);
+    text-shadow: 2px 2px rgb(12, 13, 12);
+    background-color: rgb(97, 229, 167);
+    box-shadow: rgba(90, 214, 156, 0.709) 0px 5px 15px;
+}
+
+
+.admindashboard-usercard-sub-header-two-verify {
+    margin: 2px;
+    height: auto;
+    border-radius: 5px;
+    text-align: center;
+    font-size: 25px;
+    width: 100%;
+    padding-left: 10px;
+    padding-right: 10px;
+    text-align: center;
+    color: rgb(252, 252, 252);
+    text-shadow: 2px 2px rgb(12, 13, 12);
+    background-color: rgb(229, 97, 97);
+    box-shadow: rgba(214, 90, 90, 0.709) 0px 5px 15px;
+}
+
+@media (max-width: 800px) {
+    .admindashboard-user-sub-container {
+        display: block;
+        width: 100%;
+        height: auto;
+        justify-content: space-around;
+        padding: 20px;
+    }
+
+    .admindashboard-usercount {
+        height: auto;
+        width: 100%;
+        background-color: rgb(255, 255, 255);
+        box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 5px;
+        border-radius: 10px;
+        margin: 2px;
+        margin-bottom: 20px;
+        display: block;
+        padding-bottom: 10px;
+    }
+
+    .admindashboard-usercard-sub-header-two-verify {
+        margin: 2px;
+        border-radius: 5px;
+        text-align: center;
+        font-size: 15px;
+        width: 100%;
+        padding-left: 10px;
+        padding-right: 10px;
+        text-align: center;
+        color: rgb(252, 252, 252);
+        text-shadow: 2px 2px rgb(12, 13, 12);
+        background-color: rgb(229, 97, 97);
+        box-shadow: rgba(214, 90, 90, 0.709) 0px 5px 15px;
+    }
+
+    .admindashboard-usercard-sub-header-two-verify-true {
+        margin: 2px;
+        border-radius: 5px;
+        text-align: center;
+        font-size: 25px;
+        width: 100%;
+        padding-left: 10px;
+        padding-right: 10px;
+        text-align: center;
+        color: rgb(252, 252, 252);
+        text-shadow: 2px 2px rgb(12, 13, 12);
+        background-color: rgb(97, 229, 167);
+        box-shadow: rgba(90, 214, 156, 0.709) 0px 5px 15px;
+    }
+
+    .admindashboard-usercard-sub-header-two-verify-true {
+        margin: 2px;
+        border-radius: 5px;
+        text-align: center;
+        font-size: 15px;
+        width: 100%;
+        padding-left: 10px;
+        padding-right: 10px;
+        text-align: center;
+        color: rgb(252, 252, 252);
+        text-shadow: 2px 2px rgb(12, 13, 12);
+        background-color: rgb(97, 229, 167);
+        box-shadow: rgba(90, 214, 156, 0.709) 0px 5px 15px;
+
+    }
+    .admindashboard-usercard-sub-header-two-user {
+        font-size: 15px;
+    }
+    .admindashboard-usercard-sub-header-two-admin {
+        font-size: 15px;
+    }
 }

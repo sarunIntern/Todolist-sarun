@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-export const listuser= async () =>
+export const listuser = async () =>
   await axios.get(process.env.NEXT_PUBLIC_APP_API+ "/auth/Admin/Listuser/user")
 
 export const listuserID= async (id) =>

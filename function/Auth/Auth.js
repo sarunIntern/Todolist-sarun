@@ -18,3 +18,9 @@ export const logout = async () =>
 export const requesttoken= async () =>
   await axios.get(process.env.NEXT_PUBLIC_APP_APIIN+ "/controller/requesttoken");
 
+export const requesttokens= async () =>
+  await axios.get(process.env.NEXT_PUBLIC_APP_APIIN+ "/controller/requesttokens");
+
+
+
+

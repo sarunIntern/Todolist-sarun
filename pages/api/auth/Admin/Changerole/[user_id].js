@@ -11,7 +11,8 @@ export default async function (req, res) {
             res.status(401).send("Don't have user")
         }
     } catch (err) {
-        res.status(500).send("CANNOT UPDATE ROLE USER SERVER ERROR !!!")
+        
+        res.status(500).json("CANNOT UPDATE ROLE USER SERVER ERROR !!!")
     }
 
 }

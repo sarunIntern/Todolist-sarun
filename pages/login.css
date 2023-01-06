@@ -48,7 +48,7 @@
    
 }
 .login-content{
-
+  border-radius: 8px;
    background-color: white;
     padding: 20px;
     width: 600px;

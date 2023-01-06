@@ -2,22 +2,23 @@ import React, { useState, useEffect } from 'react'
 import { listuser } from '../../../function/User'
 import * as moment from 'moment';
 import { changerole, deleteuser } from '../../../function/Auth/Admin';
-import { AiFillDelete } from "react-icons/ai";
+import { AiFillDelete, AiOutlineEye } from "react-icons/ai";
+import { BsFillPersonFill, BsCheckLg } from "react-icons/bs";
+import { RiAdminFill } from "react-icons/ri";
 //alert
 import Swal from 'sweetalert2'
 import Confirm from "../../../Alert/Confirm";
 import { useRouter } from 'next/router';
-function Admindashboard({ posts }) {
+function Admindashboard(props) {
   const router = useRouter();
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     setLoading(false);
-  }, [posts]);
+  }, [props]);
 
   function refreshdata() {
     setLoading(true);
-
     router.replace(router.asPath);
   }
 
@@ -42,8 +43,8 @@ function Admindashboard({ posts }) {
         }).catch((err) => {
           Swal.fire({
             position: 'top',
-            title: 'Error!',
-            text: err.response.data,
+            title: 'Error!!',
+            text: err.response,
             icon: 'error',
             iconColor: 'Red',
             confirmButtonColor: '#3085d6',
@@ -74,7 +75,7 @@ function Admindashboard({ posts }) {
         }).catch((err) => {
           Swal.fire({
             position: 'top',
-            title: 'Error!',
+            title: 'Error!!',
             text: err.response.data,
             icon: 'error',
             iconColor: 'Red',
@@ -88,6 +89,11 @@ function Admindashboard({ posts }) {
       console.log(err)
     })
   }
+
+  function handleInfo(user_id) {
+    router.push(`http://localhost:3000/admin/Admindashboard/${user_id}`)
+  }
+
   const roleData = ["a", "u"];
   return (
     <>
@@ -102,56 +108,87 @@ function Admindashboard({ posts }) {
         )
         : (
           <div className="admindashboard-container">
-            <div className="admindashboard-card">
-              <div className="admindashboard-card-header">
-                <h1>All User Profile</h1>
+            <div className='admidashboard-sub-container'>
+              <div className='admindashboard-user-sub-container'>
+
+                <div className='admindashboard-usercount'>
+                  <div className="admindashboard-usercard-header">
+                    <h1>User count</h1>
+                  </div>
+                  <div className='admindashboard-usercard-subheader'>
+                    <div className="admindashboard-usercard-header-part-user">
+                      <BsFillPersonFill />
+                    </div>
+                    <div className="admindashboard-usercard-header-part-admin">
+                      <RiAdminFill />
+                    </div>
+                  </div>
+                  <div className='admindashboard-usercard-subheader'>
+                    <div className="admindashboard-usercard-sub-header-two-user">
+                      <div>Have {props.posts.length} user</div>
+                    </div>
+                    <div className="admindashboard-usercard-sub-header-two-admin">
+                      <div>Have {props.admin.length} admin</div>
+                    </div>
+                  </div>
+                </div>
+
+                <div className='admindashboard-usercount'>
+                  <div className="admindashboard-usercard-header">
+                    <h1>User verify count</h1>
+                  </div>
+                  <div className='admindashboard-usercard-subheader'>
+                    <div className="admindashboard-usercard-header-part-verify">
+                      <BsCheckLg />
+                    </div>
+                  </div>
+                  <div className='admindashboard-usercard-subheader'>
+                    <div className="admindashboard-usercard-sub-header-two-verify-true">
+                      <div>{props.verified.length} verification</div>
+                    </div>
+                    <div className="admindashboard-usercard-sub-header-two-verify">
+                      <div>{props.posts.length - props.verified.length} Not verification</div>
+                    </div>
+                  </div>
+                </div>
+
               </div>
-              <div className="admindashboard-card-content">
-                <div className="table-responsive">
-                  <table className="table">
-                    <thead className="admin-thead-con">
-                      <tr>
-                        <th scope="col">No.</th>
-                        <th scope="col">Name</th>
-                        <th scope="col">Email</th>
-                        <th scope="col">Status</th>
-                        <th scope="col">Role</th>
-                        <th scope="col">Create at</th>
-                        <th scope="col">Last_Login</th>
-                        <th scope="col">Delete</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {posts.map((item, index) =>
-                        <tr key={index}>
-                          <th scope="row">{index + 1}</th>
-                          <td className='text-nowrap'>{item.username}</td>
-                          <td className='text-nowrap'>{item.user_email}</td>
-                          {item.user_status
-                            ? <td className='text-nowrap' style={{ color: "Green" }}>true</td>
-                            : <td className='text-nowrap' style={{ color: "red" }}>false</td>
+              <div className="admindashboard-card">
+                <div className="admindashboard-card-header">
+                  <h1>All User Profile</h1>
+                </div>
+                <div className="admindashboard-card-content">
+                  <div className="table-responsive">
+                    <table className="table">
+                      <thead className="admin-thead-con">
+                        <tr>
+                          <th scope="col">No.</th>
+                          <th scope="col">Name</th>
+                          <th scope="col">Email</th>
+                          <th scope="col">Status</th>
+                          <th scope="col">Role</th>
+                          <th scope="col">Create at</th>
+                          <th scope="col">Last_Login</th>
+                          <th scope="col">Function</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {props.posts.map((item, index) =>
+                          <tr key={index}>
+                            <th scope="row">{index + 1}</th>
+                            <td className='text-nowrap'>{item.username}</td>
+                            <td className='text-nowrap'>{item.user_email}</td>
+                            {item.user_status
+                              ? <td className='text-nowrap' style={{ color: "Green" }}>true</td>
+                              : <td className='text-nowrap' style={{ color: "red" }}>false</td>
 
-                          }
-                          <td className='text-nowrap'>
-                            {item.user_role === 'a'
-                              ?
-                              <select
-                                className="form-select"
-                                style={{ width: "100px", backgroundColor: "lightgreen" }}
-                                defaultValue={item.user_role}
-                                onChange={e => handleChangeRole(e, item.user_id)}
-                              >
-                                {roleData.map((item, index) =>
-                                  <option value={item} key={index}>
-                                    {item}
-                                  </option>
-                                )}
-
-                              </select>
-                              : (
+                            }
+                            <td className='text-nowrap'>
+                              {item.user_role === 'a'
+                                ?
                                 <select
                                   className="form-select"
-                                  style={{ width: "100px", backgroundColor: "lightskyblue" }}
+                                  style={{ width: "100px", backgroundColor: "lightgreen" }}
                                   defaultValue={item.user_role}
                                   onChange={e => handleChangeRole(e, item.user_id)}
                                 >
@@ -162,18 +199,40 @@ function Admindashboard({ posts }) {
                                   )}
 
                                 </select>
-                              )
-                            }
-                          </td>
-                          <td className='text-nowrap'>{moment(item.user_created_on).format("lll")}</td>
-                          <td className='text-nowrap'>{moment(item.last_login).format("lll")}</td>
-                          <td>
-                            <button type="button" className="btn btn-danger"> <AiFillDelete onClick={() => handleRemove(item.user_id)} /> </button>
-                          </td>
-                        </tr>
-                      )}
-                    </tbody>
-                  </table>
+                                : (
+                                  <select
+                                    className="form-select"
+                                    style={{ width: "100px", backgroundColor: "lightskyblue" }}
+                                    defaultValue={item.user_role}
+                                    onChange={e => handleChangeRole(e, item.user_id)}
+                                  >
+                                    {roleData.map((item, index) =>
+                                      <option value={item} key={index}>
+                                        {item}
+                                      </option>
+                                    )}
+
+                                  </select>
+                                )
+                              }
+                            </td>
+                            <td className='text-nowrap'>{moment(item.user_created_on).format("lll")}</td>
+                            <td className='text-nowrap'>{moment(item.last_login).format("lll")}</td>
+                            <td>
+                              <div className='admindashboard-function'>
+                                <div className='admindashboard-function-con'>
+                                  <button type="button" className="btn btn-danger"> <AiFillDelete onClick={() => handleRemove(item.user_id)} /> </button>
+                                </div>
+                                <div className='admindashboard-function-con'>
+                                  <button type="button" className="btn btn-secondary"> <AiOutlineEye onClick={() => handleInfo(item.user_id)} /> </button>
+                                </div>
+                              </div>
+                            </td>
+                          </tr>
+                        )}
+                      </tbody>
+                    </table>
+                  </div>
                 </div>
               </div>
             </div>
@@ -185,12 +244,17 @@ function Admindashboard({ posts }) {
     </>
   )
 }
+
 export async function getServerSideProps() {
   const result = await listuser()
-  const posts = await result.data
+  const user = await result.data.user
+  const verified = await result.data.verified
+  const admin = await result.data.admin
   return {
     props: {
-      posts
+      posts: user,
+      verified: verified,
+      admin: admin
     },
   }
 }

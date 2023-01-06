@@ -13,6 +13,7 @@ export default async function logout (req,res){
                 maxAge: -1 ,
                 path:"/",  
               }));
+           
             res.status(200).send("Logout success full!!")
         }
         

@@ -17,11 +17,13 @@ function Header() {
         gettoken()
     }, [Token]);
     console.log(Data)
+    
     function gettoken() {
         requesttoken().then(res => {
             if (res.data !== null) {
                 setData(res.data.Decode)
                 setToken(res.data.token)
+                localStorage.setItem("user_id",res.data.Decode.user_id);
             } else {
                 setData(null)
                 setToken(null)
@@ -39,6 +41,7 @@ function Header() {
                 icon: 'success',
                 title: res.data
             })
+            localStorage.clear()    
             setToken(null)
             router.replace('/Login')
             // router.refresh()
@@ -80,7 +83,9 @@ function Header() {
                                 </div>
                                 <div className="header-con">
                                     <ul className={click ? "menu active" : " menu"}>
-
+                                        <li className="menu-link" onClick={closeMobileMenu}>
+                                            <Link href="/user" >Dashboard</Link>
+                                        </li>
                                         <li className="menu-link" onClick={closeMobileMenu}>
                                             <Link href="/" onClick={logouts}>Logout</Link>
                                         </li>
@@ -139,4 +144,5 @@ function Header() {
 //       },
 //     }
 //   }
+
 export default Header

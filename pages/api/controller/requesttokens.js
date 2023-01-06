@@ -1,5 +1,5 @@
 const Jwt = require('jsonwebtoken')
-export default async function requesttoken(req,res){
+export default async function requesttokens(req,res){
     try {
         const { cookies } = await req;
         const jwt = await cookies.jwt_token

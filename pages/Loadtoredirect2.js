@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 // import { useNavigate } from "react-router-dom";
 import { useRouter } from 'next/router'
-import { logout } from "../function/Auth/Auth";
 import Swal from 'sweetalert2'
 import Error from "../Alert/ErrorTimer";
 const LoadingToRedirect = () => {
@@ -18,7 +17,7 @@ const LoadingToRedirect = () => {
             position:'top',
             icon: 'error',
             iconColor:'Red',
-            title: 'Your not permisstion',
+            title: 'Token has been expire please login',
             html: 'ย้ายไปหน้าหลักใน <b></b> .',
           }).then((result) => {
             if (result.dismiss === Swal.DismissReason.timer) {
