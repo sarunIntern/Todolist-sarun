@@ -173,9 +173,10 @@ export async function getServerSideProps(context) {
     const verify = await token.data.token
     const { params } = context
     const result = await listusertodolistid(params.user_id)
+    const user = await result.data.user
     const todolists = await result.data.todolists
     const categorys = await result.data.category
-    if(todolists.length > 0 && params.user_id == verify.user_id ){
+    if(user.length > 0 && params.user_id == verify.user_id ){
         return {
             props: {
                 todolists: todolists,
