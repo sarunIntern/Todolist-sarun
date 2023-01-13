@@ -16,8 +16,8 @@ function Header() {
     useEffect(() => {
         gettoken()
     }, [Token]);
-    console.log(Data)
-    
+
+
     function gettoken() {
         requesttoken().then(res => {
             if (res.data !== null) {
@@ -34,6 +34,7 @@ function Header() {
         // const jwt = Cookies.get('jwt_token')
         // setData(jwt)
     }
+
     function logouts() {
         logout().then(res => {
             Toast.fire({
@@ -49,6 +50,11 @@ function Header() {
             console.log(err.response)
         })
     }
+
+    function redirect(){
+        router.replace(`/user/userdashboard/${Data.user_id}`)
+    }
+
     return (
         <div className='Header-con'>
             <div className="Header">
@@ -62,14 +68,14 @@ function Header() {
                                 <div className="header-con">
                                     <ul className={click ? "menu active" : " menu"}>
                                         <li className="menu-link" onClick={closeMobileMenu}>
-                                            <Link href="/admin/Admindashboard">Admindashboard</Link>
+                                            <Link id='admin-dashboard' href="/admin/Admindashboard">Admindashboard</Link>
                                         </li>
                                         <li className="menu-link" onClick={closeMobileMenu}>
-                                            <Link href="/" onClick={logouts}>Logout</Link>
+                                            <Link href="/" onClick={logouts} id='Logout-header'>Logout</Link>
                                         </li>
                                     </ul>
                                 </div>
-                                <div className="mobile-menu" onClick={handleClick}>
+                                <div className="mobile-menu" onClick={handleClick} id="mobile-menu">
                                     {click ? (
                                         <FiX />
                                     ) : (
@@ -84,14 +90,14 @@ function Header() {
                                 <div className="header-con">
                                     <ul className={click ? "menu active" : " menu"}>
                                         <li className="menu-link" onClick={closeMobileMenu}>
-                                            <Link href="/user" >Dashboard</Link>
+                                            <Link id='user-dashboard' href="/" onClick={redirect}>Dashboard</Link>
                                         </li>
                                         <li className="menu-link" onClick={closeMobileMenu}>
-                                            <Link href="/" onClick={logouts}>Logout</Link>
+                                            <Link href="/" onClick={logouts} id='Logout-header'>Logout</Link>
                                         </li>
                                     </ul>
                                 </div>
-                                <div className="mobile-menu" onClick={handleClick}>
+                                <div className="mobile-menu" onClick={handleClick} id="mobile-menu">
                                     {click ? (
                                         <FiX />
                                     ) : (
@@ -112,11 +118,11 @@ function Header() {
                                     <Link href="/Register">Register</Link>
                                 </li>
                                 <li className="menu-link" onClick={closeMobileMenu}>
-                                    <Link href="/Login">Login</Link>
+                                    <Link href="/Login" id='Login-header'>Login</Link>
                                 </li>
                             </ul>
                         </div>
-                        <div className="mobile-menu" onClick={handleClick}>
+                        <div className="mobile-menu" onClick={handleClick} id="mobile-menu" >
                             {click ? (
                                 <FiX />
                             ) : (
@@ -132,17 +138,5 @@ function Header() {
     )
 }
 
-// export async function getServerSideProps() {
- 
-//     const result = await requesttokens()
-//     // const res = await fetch('https://final-ccna-backend.vercel.app/Category/category');
-//     const posts = await result.data
-  
-//     return {
-//       props: {
-//         posts
-//       },
-//     }
-//   }
 
 export default Header

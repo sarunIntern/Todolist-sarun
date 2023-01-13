@@ -23,7 +23,6 @@ function Login() {
                     })
                     router.reload()
                     router.replace('/')
-                   
             }).catch((err) => {
                 Swal.fire({
                     position: 'top',
@@ -53,18 +52,18 @@ function Login() {
                     <form onSubmit={formsubmit}>
                         <div className="form-group">
                             <label >Email address</label>
-                            <input name='email' onChange={handleChange} type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" required />
+                            <input name='email' onChange={handleChange} type="email" className="form-control" id="Login-Input_Email" aria-describedby="emailHelp" placeholder="Enter email" required />
                         </div>
                         <div className="form-group">
                             <label >Password</label>
-                            <input name='password' onChange={handleChange} type="password" className="form-control" id="exampleInputPassword1" placeholder="Password" required />
+                            <input name='password' onChange={handleChange} type="password" className="form-control" id="Login-Input_Password" placeholder="Password" required />
                         </div>
                         {/* <div class="form-check">
                             <input type="checkbox" class="form-check-input" id="exampleCheck1" />
                             <label class="form-check-label" for="exampleCheck1">Check me out</label>
                         </div> */}
                         <div className='register-buttoncon'>
-                            <button type="submit" className="register-button">Submit</button>
+                            <button type="submit" className="register-button"id='Login-Submit'>Submit</button>
                         </div>
                         
                     </form>

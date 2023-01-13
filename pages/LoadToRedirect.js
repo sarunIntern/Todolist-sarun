@@ -8,12 +8,14 @@ const LoadingToRedirect = () => {
     const [ count, setCount ] = useState(4)
     // const navigate = useNavigate()
     const router = useRouter();
+
     useEffect(()=>{
         const interval = setInterval(()=>{
             setCount((currentCount)=> --currentCount)
         },100)
         // Redirect
         if(count === 3){
+          
           Error.fire({
             position:'top',
             icon: 'error',
@@ -23,6 +25,8 @@ const LoadingToRedirect = () => {
           }).then((result) => {
             if (result.dismiss === Swal.DismissReason.timer) {
                 router.replace('/')
+            
+              
             }
         
         },[count])

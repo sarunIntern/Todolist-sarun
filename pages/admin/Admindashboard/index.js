@@ -12,7 +12,7 @@ import { useRouter } from 'next/router';
 function Admindashboard(props) {
   const router = useRouter();
   const [loading, setLoading] = useState(true);
-
+  console.log(props)
   useEffect(() => {
     setLoading(false);
   }, [props]);

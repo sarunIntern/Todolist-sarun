@@ -16,7 +16,7 @@ export default async (req, res) => {
   //       await transporter.sendMail({
   //         from: 'todo.sarun@gmail.com',
   //         to: email,
-  //         subject: `Contact form submission from TesterTODOLISTS`,
+  //         subject: `TODOLIST:${contact}`,
   //         html: `<h1>You have a contact form submission ${username} !!</h1><br>
   //           <p><strong>Email: </strong> ${email}</p><br>
   //           <h1><a href='http://localhost:3000/verifycation/${contact}'>Click</a></h1>
@@ -39,11 +39,11 @@ export default async (req, res) => {
       from: 'My Company <company@companydomain.org>',
       to: email,
       subject: "Hi Mailhog!",
-      text: `<h1>This is the email content</h1></br>
-      <h1>You have a contact form submission ${username} !!</h1><br>
-                 <p><strong>Email: </strong> ${email}</p><br>
-                 <h1><a href='http://localhost:3000/verifycation/${contact}'>Click</a></h1>
-      `,
+      text: `This is the email content
+              You have a contact form submission ${username} !!
+                 Email:${email}
+                 http://localhost:3000/verifycation/${contact}`
+      ,
     });
     return res.status(200).json("Email sender SUCCESS!!");
   } catch (err) {

@@ -1,76 +1,438 @@
 .usertodolist-con {
-    align-items: center;
-    justify-content: center;
-    display: flex;
-    margin: auto;
-    height: 100%;
-    margin-top: 20px;
-    /* background-color: rgb(217, 13, 13)  ; */
-    padding: 10px;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  margin: auto;
+  height: auto;
+  margin-top: 20px;
+  /* background-color: rgb(217, 13, 13)  ; */
+  padding: 10px;
+  margin-bottom: 25px;
+
 }
 
 .usertodolist-con-sub {
-    display: block;
-    width: 96%;
-    /* background-color: aqua  ; */
-   
+  display: block;
+  width: 96%;
+  /* background-color: aqua  ; */
+
 }
 
 .usertodolist-card {
-    justify-content: center;
-    border-radius: 10px;
-    /* height: 80rem; */
-    width: 100%;
-    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 5px;
-    overflow: hidden;
-    overflow-y: auto;
-  
+  justify-content: center;
+  border-radius: 10px;
+  /* height: 80rem; */
+  width: 100%;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 5px;
+
+
+
 }
+
+.cat-search-container {
+  padding-left: 20px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 5px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  padding-top: 5px;
+  border-radius: 5px;
+  padding-bottom: 5px;
+  background-color: rgb(255, 255, 255);
+  width: 100%;
+  display: flex;
+
+}
+.cat-search-container-sub{
+/* background-color: #23c483; */
+  width: 100%;
+  padding-bottom: 4px;
+  padding-top: 4px;
+}
+.cat-search-container-sub-2{
+/* background-color: #23c483; */
+width: 100%;
+ text-align: end;
+ padding-right: 40px;
+ padding-bottom: 4px;
+ padding-top: 4px;
+ overflow: auto;
+}
+.cat-search-container-sub-1{
+/* background-color: #f4e603; */
+  width: 100%;
+ text-align: center;
+ padding-right: 20px;
+ padding-bottom: 4px;
+ padding-top: 4px;
+ 
+}
+.cat-search-container-sub-solo{
+/* background-color: #f4e603; */
+  width: 100%;
+ text-align: end;
+ padding-right:80px;
+ padding-bottom: 4px;
+ padding-top: 4px;
+ 
+}
+
+.scrollable-menu {
+  height: auto;
+  max-height: 200px;
+  overflow-x: hidden;
+
+}
+
 .usertodolist-card-header {
-    background-color: rgb(255, 255, 255);
-    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 5px;
-    color: rgb(46, 122, 220);
-    border-radius: 5px;
-    font-weight: 600;
-    text-shadow: 2px 2px rgb(226, 197, 66);
-    padding-left: 16px;
-    border-radius: 5px;
-    letter-spacing: 1px;
+  background-color: rgb(255, 255, 255);
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 5px;
+  color: rgb(46, 122, 220);
+  border-radius: 5px;
+  font-weight: 600;
+  text-shadow: 2px 2px rgb(226, 197, 66);
+  padding-left: 16px;
+  border-radius: 5px;
+  letter-spacing: 1px;
 }
-.usertodolist-card-content{
-    background-color: rgb(255, 255, 255);
-    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-    border-radius: 5px;
-    padding: 10px;
-    
+
+.usertodolist-card-content {
+  background-color: rgb(255, 255, 255);
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  border-radius: 5px;
+  padding: 10px;
+  max-height: 600px;
+  overflow: hidden;
+  overflow-y: auto;
+
 }
-.usertodolist-lable{
-    font-size: 20px;
+
+.usertodolist-lable {
+  font-size: 20px;
 }
-.usertodolist-button{
-    padding: 1.3em 3em;
-    font-size: 12px;
-    text-transform: uppercase;
-    letter-spacing: 2.5px;
-    font-weight: 500;
-    color: #000;
-    background-color: rgb(111, 151, 200);
-    box-shadow: 0px 5px 10px rgb(157, 159, 161);
-    border: none;
-    border-radius: 45px;
-    transition: all 0.3s ease 0s;
-    cursor: pointer;
-    outline: none;
+
+.usertodolist-button {
+  padding: 1.3em 3em;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 2.5px;
+  font-weight: 500;
+  color: #000;
+  background-color: rgb(111, 151, 200);
+  box-shadow: 0px 5px 10px rgb(157, 159, 161);
+  border: none;
+  border-radius: 45px;
+  transition: all 0.3s ease 0s;
+  cursor: pointer;
+  outline: none;
 }
-.usertodolist-button:hover{
-    background-color: #23c483;
+
+.usertodolist-button:hover {
+  background-color: #23c483;
   box-shadow: 0px 15px 20px rgba(46, 229, 157, 0.4);
   color: #fff;
   transform: translateY(-6px);
 }
+.usertodolist-button-lists {
+  padding: 1.3em 3em;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 2.5px;
+  font-weight: 500;
+  color: #000;
+  background-color: rgb(209, 211, 212);
+  box-shadow: 0px 5px 10px rgb(157, 159, 161);
+  border: none;
+  border-radius: 45px;
+  transition: all 0.3s ease 0s;
+  cursor: pointer;
+  outline: none;
+}
+
+.usertodolist-button-lists:hover {
+  background-color: #ffc107;
+  box-shadow: 0px 15px 20px #ffc10749;
+  color: #fff;
+  transform: translateY(-6px);
+}
+.usertodolist-button-lists-disable {
+  padding: 1.3em 3em;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 2.5px;
+  font-weight: 500;
+  color: rgb(228, 214, 63);
+  background-color: rgb(25, 26, 26);
+  border: none;
+  border-radius: 45px;
+  transition: all 0.3s ease 0s;
+  outline: none;
+}
+
+.usertodolist-button-duedate {
+  padding: 1.3em 3em;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 2.5px;
+  font-weight: 500;
+  color: #000;
+  background-color:rgb(209, 211, 212);
+  box-shadow: 0px 5px 10px rgb(157, 159, 161);
+  border: none;
+  border-radius: 45px;
+  transition: all 0.3s ease 0s;
+  cursor: pointer;
+  outline: none;
+}
+
+.usertodolist-button-duedate:hover {
+  background-color: #ffc107;
+  box-shadow: 0px 15px 20px #ffc10749;
+  color: #fff;
+  transform: translateY(-6px);
+}
+.usertodolist-button-category {
+  padding: 1.3em 3em;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 2.5px;
+  font-weight: 500;
+  color: #000;
+  background-color:rgb(209, 211, 212);
+  box-shadow: 0px 5px 10px rgb(157, 159, 161);
+  border: none;
+  border-radius: 45px;
+  transition: all 0.3s ease 0s;
+  cursor: pointer;
+  outline: none;
+}
+
+.usertodolist-button-category:hover {
+  background-color: #ffc107;
+  box-shadow: 0px 15px 20px #ffc10749;
+  color: #fff;
+  transform: translateY(-6px);
+}
+.usertodolist-button-category-confirm {
+  padding: 1.3em 3em;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 2.5px;
+  font-weight: 500;
+  color: #000;
+  background-color: rgb(111, 151, 200);
+  box-shadow: 0px 5px 10px rgb(157, 159, 161);
+  border: none;
+  border-radius: 45px;
+  transition: all 0.3s ease 0s;
+  cursor: pointer;
+  outline: none;
+}
+
+.usertodolist-button-category-confirm:hover {
+  background-color: #23c483;
+  box-shadow: 0px 15px 20px rgba(46, 229, 157, 0.4);
+  color: #fff;
+  transform: translateY(-6px);
+}
+
+.usertodolist-button-duedate-delete {
+  padding: 1.3em 3em;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 2.5px;
+  font-weight: 500;
+  color: #000;
+  background-color: #dc3545;
+  box-shadow: 0px 5px 10px #dc354686;
+  border: none;
+  border-radius: 45px;
+  transition: all 0.3s ease 0s;
+  cursor: pointer;
+  outline: none;
+}
+
+.usertodolist-button-duedate-delete:hover {
+  background-color:  #dc5935;
+  box-shadow: 0px 15px 20px  #dc5935b1;
+  color: #fff;
+  transform: translateY(-6px);
+}
+
 .usertodolist-buttoncon {
-    width: 100%;
-    margin-top: 10px;
-    text-align: center;
+  width: 100%;
+  margin-top: 10px;
+  text-align: center;
   
-  }
+}
+.usertodolist-buttoncon-lists {
+  width: 100%;
+  margin-top: 10px;
+  margin-bottom: 10px;
+
+}
+.usertodolist-buttoncon-duedate {
+  width: 100%;
+  margin-top: 10px;
+  margin-bottom: 10px;
+
+}
+
+/* CSS */
+.button-31 {
+  background-color: rgb(82, 159, 226);
+  border-radius: 4px;
+  border-style: none;
+  color: #fff;
+  cursor: pointer;
+  font-size: 15px;
+  line-height: 1.5;
+  margin: 0;
+  max-width: none;
+  outline: none;
+  overflow: hidden;
+  padding: 8px;
+  position: relative;
+  text-align: center;
+  text-transform: none;
+  user-select: none;
+  margin-bottom: 3px;
+}
+
+.button-31:hover,
+.button-31:focus {
+  opacity: .75;
+}
+
+.todolistadd-table {
+  display: flex;
+
+
+}
+
+/* CSS */
+.button-32 {
+  background-color: #fff000;
+  border-radius: 12px;
+  color: #000;
+  cursor: pointer;
+  font-weight: bold;
+  padding: 10px 15px;
+  text-align: center;
+  transition: 200ms;
+
+  box-sizing: border-box;
+  border: 0;
+  font-size: 16px;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.button-32:not(:disabled):hover,
+.button-32:not(:disabled):focus {
+  outline: 0;
+  background: #f4e603;
+  box-shadow: 0 0 0 2px rgba(0, 0, 0, .2), 0 3px 8px 0 rgba(0, 0, 0, .15);
+}
+
+.button-32:disabled {
+  filter: saturate(0.2) opacity(0.5);
+  -webkit-filter: saturate(0.2) opacity(0.5);
+  cursor: not-allowed;
+}
+
+.usertodolist-lable-userdashboard {
+  font-size: 40px;
+}
+
+.usertodolist-lable-userdashboard-list {
+  background-color: rgb(90, 214, 156);
+  margin: 4px;
+  box-shadow: rgba(90, 214, 156, 0.709) 0px 5px 5px;
+  color: rgb(252, 252, 252);
+  width: 100;
+  font-weight: 600;
+  text-shadow: 2px 2px rgb(12, 13, 12);
+  padding-left: 16px;
+  border-radius: 5px;
+}
+
+.usertodolist-list-content {
+  box-shadow: 0 3px 8px 0 rgba(0, 0, 0, .15);
+  padding-bottom: 15px;
+  padding-top: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  background-color: aliceblue;
+  margin: 4px;
+  margin-top: 30px;
+  padding-left: 16px;
+  border-radius: 5px;
+  letter-spacing: 1px;
+  height: auto;
+}
+
+.usertodolist-list-checkbox {
+  padding: 5px;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  margin-top: 5px;
+  box-shadow: 0 0 0 2px rgba(0, 0, 0, .2), 0 3px 8px 0 rgba(0, 0, 0, .15);
+  display: flex;
+  justify-content: flex-start;
+}
+.list-div{
+  /* margin-right: 20px; */
+  /* background-color: #23c483; */
+  display: flex;
+  justify-content: flex-start;
+  width: 100%;
+ 
+}
+.list-div-end{
+  /* background-color: #f403a0; */
+  margin-right: 20px;
+}
+.list-div-end-con{
+  /* background-color: #f4e603; */
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+.usertodolist-list-checkbox:hover {
+  cursor: pointer;
+  margin-bottom: 10px;
+  padding: 5px;
+  border-radius: 5px;
+  box-shadow: 0 0 0 2px rgb(48, 235, 11), 0 3px 8px 0 rgb(107, 224, 136);
+}
+/* checklsit */
+.checked-item {
+  text-decoration: line-through;
+}
+.listsubmit-buttoncon{
+  width: 100%;
+  margin-top: 10px;
+  text-align: center;
+}
+.listsubmit-button {
+  padding: 1.3em 3em;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 2.5px;
+  font-weight: 500;
+  color: #000;
+  background-color: rgb(111, 151, 200);
+  box-shadow: 0px 5px 10px rgb(157, 159, 161);
+  border: none;
+  border-radius: 45px;
+  transition: all 0.3s ease 0s;
+  cursor: pointer;
+  outline: none;
+}
+.listsubmit-button:hover {
+  background-color: #23c483;
+  box-shadow: 0px 15px 20px rgba(46, 229, 157, 0.4);
+  color: #fff;
+  transform: translateY(-6px);
+}

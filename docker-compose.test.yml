@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+  cypress:
+    build: ./cypress
+    container_name: cypress
+    environment:
+      - CYPRESS_BASE_URL=http://localhost:3000
+    # share the current folder as volume to avoid copying
+    volumes:
+      - ./cypress:/cypress
+      - ./cypress.config.js:/cypress.config.js
+      - ./package.json:/package.json
+

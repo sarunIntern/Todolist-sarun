@@ -35,7 +35,10 @@ export default async function middleware(req) {
     if (url.includes('/api/auth/Admin')) {
         if (!cookies) {
             //ตัวนี้คือไม่มี Token ให้้ย้ายไปหน้า Login
-            return NextResponse.redirect('http://localhost:3000/Loadtoredirect')
+            return new NextResponse(
+                JSON.stringify({ success: false, message: 'authentication failed' }),
+                { status: 401, headers: { 'content-type': 'application/json' } }
+              )
         } else {
             try {
                 //ใช้ jose แทน jwt /// jose verify Token
@@ -69,8 +72,27 @@ export default async function middleware(req) {
             }
         }
     }
+    if (url.includes('/api/auth/User')) {
+        if (!cookies) {
+            //ตัวนี้คือไม่มี Token ให้้ย้ายไปหน้า Login
+            return new NextResponse(
+                JSON.stringify({ success: false, message: 'authentication failed' }),
+                { status: 401, headers: { 'content-type': 'application/json' } }
+              )
+        } else {
+            try {
+                //ใช้ jose แทน jwt /// jose verify Token
+                const { payload } = await jose.jwtVerify(cookies, new TextEncoder().encode(process.env.SECRET_TOKEN));
+                const user_id = await payload.user_id
+                req.user_id = await user_id
+            } catch (err) {
+                console.log(err);
+                return NextResponse.redirect('http://localhost:3000/Loadtoredirect2')
+            }
+        }
+    }
 }
 //ตัวกรอง middleware ให้ทำงานบน path ที่เรากำหนดเฉพาะได้
 export const config = {
-    matcher: ['/admin/:path*', '/api/auth/Admin:path*','/user/:path*'],
+    matcher: ['/admin/:path*', '/api/auth/Admin:path*','/user/:path*','/api/auth/User:path*'],
 }

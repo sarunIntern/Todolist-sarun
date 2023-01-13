@@ -1,14 +1,15 @@
-const Jwt = require('jsonwebtoken')
+const jose = require('jose')
 export default async function requesttokens(req,res){
+      const {Cookie} = await req.body
     try {
-        const { cookies } = await req;
-        const jwt = await cookies.jwt_token
-        if (!jwt) {
+        if (!Cookie) {
             res.status(200).json(null)
         }else{
-            const decode = Jwt.verify(jwt,process.env.SECRET_TOKEN)
-            res.status(200).json({token:jwt,Decode:decode})
+            const { payload } = await jose.jwtVerify(Cookie, new TextEncoder().encode(process.env.SECRET_TOKEN));
+            // const decode = Jwt.verify(Token,process.env.SECRET_TOKEN)
+            res.status(200).json({token:payload})
         }
+        
     } catch (err) {
         // console.log(err)
         

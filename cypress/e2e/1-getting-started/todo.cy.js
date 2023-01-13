@@ -1,0 +1,22 @@
+/// <reference types="cypress" />
+describe('template spec', () => {
+  it('passes', () => {
+    cy.visit('http://localhost:3000')
+    cy.wait(5000)
+    cy.get('#mobile-menu').click({force:true})
+    cy.wait(2000)
+    cy.get('#Login-header').click()
+    cy.get('#Login-Input_Email').click().type('sarun4144@gmail.com')
+    cy.wait(2000)
+    cy.get('#Login-Input_Password').click().type('kokai414424')
+    cy.wait(3000)
+    cy.get('#Login-Submit').click() 
+    cy.wait(3000)
+    cy.get('#user-dashboard').click()
+    cy.wait(3000)
+    cy.get('#userdashboard-add-btn').click()
+    cy.wait(1000)
+    cy.get('#todolistadd-todolistname-input').click().type('Test todolist')
+    cy.get('#userdashboard-add-btn').click()
+  })
+})

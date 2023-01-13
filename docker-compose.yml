@@ -43,9 +43,7 @@ services:
 
   web:
     container_name: todolist-app
-    build:
-      context: ./
-      dockerfile: Dockerfile
+    build: ./
     depends_on:
       - postgres
     ports:
