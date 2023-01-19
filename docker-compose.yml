@@ -12,8 +12,6 @@ services:
     volumes:
       - db_data:/var/lib/postgresql/data
       - ./docker_postgres_init.sql:/docker-entrypoint-initdb.d/docker_postgres_init.sql
-    networks:
-      - pgsite
 
   pgadmin-compose:
     image: dpage/pgadmin4
@@ -28,9 +26,6 @@ services:
     volumes:
       - pgadmin:/var/lib/pgadmin
 
-    networks:
-      - pgsite
-
   mailhog:
     container_name: mailhog
     image: mailhog/mailhog:latest
@@ -38,8 +33,7 @@ services:
     ports:
       - 1025:1025
       - 8025:8025
-    networks:
-      - pgsite
+
 
   web:
     container_name: todolist-app
@@ -57,10 +51,7 @@ services:
       NEXT_PUBLIC_APP_API: http://127.0.0.1:3000/api
       NEXT_PUBLIC_APP_APIIN: http://localhost:3000/api
       # DATABASE_URL: postgres://postgres:4144d@psql14:5432/todolistsdb
-    networks:
-      - pgsite
-networks:
-  pgsite:
+
 volumes:
   db_data:
   pgadmin:

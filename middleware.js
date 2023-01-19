@@ -47,7 +47,10 @@ export default async function middleware(req) {
                 if (role === 'a') {
                     console.log("You are Admin ", payload)
                 } else {
-                    return NextResponse.redirect('http://localhost:3000/verifycation/Redirect')
+                    return new NextResponse(
+                        JSON.stringify({ success: false, message: 'authentication failed' }),
+                        { status: 401, headers: { 'content-type': 'application/json' } }
+                      )
                 }
             } catch (err) {
                 console.log(err);
@@ -94,5 +97,5 @@ export default async function middleware(req) {
 }
 //ตัวกรอง middleware ให้ทำงานบน path ที่เรากำหนดเฉพาะได้
 export const config = {
-    matcher: ['/admin/:path*', '/api/auth/Admin:path*','/user/:path*','/api/auth/User:path*'],
+    matcher: ['/admin/:path*', '/api/auth/Admin/:path*','/user/:path*','/api/auth/User/:path*'],
 }

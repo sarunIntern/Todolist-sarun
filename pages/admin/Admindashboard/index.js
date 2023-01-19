@@ -187,6 +187,7 @@ function Admindashboard(props) {
                               {item.user_role === 'a'
                                 ?
                                 <select
+                                id={`admin-role-${index + 1}`}
                                   className="form-select"
                                   style={{ width: "100px", backgroundColor: "lightgreen" }}
                                   defaultValue={item.user_role}
@@ -201,6 +202,7 @@ function Admindashboard(props) {
                                 </select>
                                 : (
                                   <select
+                                  id={`admin-role-${index + 1}`}
                                     className="form-select"
                                     style={{ width: "100px", backgroundColor: "lightskyblue" }}
                                     defaultValue={item.user_role}
@@ -224,7 +226,7 @@ function Admindashboard(props) {
                                   <button type="button" className="btn btn-danger"> <AiFillDelete onClick={() => handleRemove(item.user_id)} /> </button>
                                 </div>
                                 <div className='admindashboard-function-con'>
-                                  <button type="button" className="btn btn-secondary"> <AiOutlineEye onClick={() => handleInfo(item.user_id)} /> </button>
+                                  <button id={`admin-seeuser-btn-${index+1}`} type="button" className="btn btn-secondary"> <AiOutlineEye onClick={() => handleInfo(item.user_id)} /> </button>
                                 </div>
                               </div>
                             </td>

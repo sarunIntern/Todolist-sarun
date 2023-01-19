@@ -1,0 +1,62 @@
+/// <reference types="cypress" />
+describe('Test login verify and permistion Admin', () => {
+    beforeEach(() => {
+        cy.visit('/')
+        cy.wait(2000)
+    })
+
+    // it('No login permistion', () => {
+    //     cy.get('#mobile-menu').click({ force: true })
+    //     cy.wait(3000)
+    //     cy.visit('/user/Userdashboard/3')
+    //     cy.wait(5000)
+    //     cy.visit('/admin/Admindashboard')
+    //     cy.wait(5000)
+
+    // })
+
+    // it('Verify Test Admin', () => {
+    //     cy.get('#mobile-menu').click({ force: true })
+    //     cy.wait(1000)
+    //     cy.get('#Login-header').click()
+    //     cy.get('#Login-Input_Email').click().type('admin@email.com')
+    //     cy.wait(1000)
+    //     cy.get('#Login-Input_Password').click().type('admin1234')
+    //     cy.wait(2000)
+    //     cy.get('#Login-Submit').click()
+    //     cy.wait(4000)
+    //     cy.get('#admin-dashboard').click()
+    //     cy.wait(5000)
+    // })
+
+    it('Admin interact user', () => {
+        cy.get('#mobile-menu').click({ force: true })
+        cy.wait(1000)
+        cy.get('#Login-header').click()
+        cy.get('#Login-Input_Email').click().type('admin@email.com')
+        cy.wait(1000)
+        cy.get('#Login-Input_Password').click().type('admin1234')
+        cy.wait(2000)
+        cy.get('#Login-Submit').click()
+        cy.wait(4000)
+        cy.get('#admin-dashboard').click()
+        cy.wait(5000)
+        cy.get('#admin-role-3').select(0)
+        cy.wait(2000)
+        cy.get('button').contains('ยืนยัน').click()
+        cy.get(2000)
+        cy.get('button').contains('OK').type('{enter}')
+        cy.wait(2000)
+        cy.get('#admin-role-3').select(1)
+        cy.wait(2000)
+        cy.get('button').contains('ยืนยัน').click()
+        cy.get(2000)
+        cy.get('button').contains('OK').type('{enter}')
+        cy.wait(2000)
+        cy.get('#admin-seeuser-btn-1').click()
+        cy.wait(5000)
+        cy.get('#listname5').click()
+        cy.wait(3000)
+    })
+
+})

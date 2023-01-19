@@ -20,7 +20,7 @@ function Todolistaddid(props) {
         Data: []
     })
 
-    console.log(formFields)
+    console.log(Value)
     useEffect(() => {
         setLoading(false)
     }, [props]);
@@ -162,7 +162,7 @@ function Todolistaddid(props) {
                                     </div>
                                     <div className="form-group">
                                         <label className="usertodolist-lable">Click here to add Task list</label><br />
-                                        <button type="button" className="button-31" role="button" onClick={increase}><AiOutlinePlus /> add list</button>
+                                        <button id="todolistdd-list-btn" type="button" className="button-31" role="button" onClick={increase}><AiOutlinePlus /> add list</button>
                                     </div>
                                     {formFields.map((item, index) =>
                                         <div key={index} className="form-group" style={{ marginTop: '10px' }}>
@@ -170,11 +170,11 @@ function Todolistaddid(props) {
                                                 <div className="input-group-prepend">
                                                     <span className="input-group-text">{index + 1}</span>
                                                 </div>
-                                                <input id="myForm" required type="text" className="form-control" name={`input`} value={item.input} onChange={(e) => handleFormChange(e, index)} />
+                                                <input id={`todolistadd-addinput-${index+1}`} required type="text" className="form-control" name={`input`} value={item.input} onChange={(e) => handleFormChange(e, index)} />
                                                 {formFields.length > 1
                                                     ? (
                                                         <div className="input-group-append">
-                                                            <button type="button" className="btn btn-danger" onClick={() => deleteInput(index)}> <AiFillDelete /> </button>
+                                                            <button id={`todolistadd-deleteinput-${index+1}`} type="button" className="btn btn-danger" onClick={() => deleteInput(index)}> <AiFillDelete /> </button>
                                                         </div>
                                                     )
                                                     : (
@@ -191,20 +191,20 @@ function Todolistaddid(props) {
                                     <div className="form-group">
                                         <label className="usertodolist-lable">Due date</label>
                                         <br />
-                                        <input type="date" name='Date' onChange={handleChange} required />
+                                        <input id="todolistadd-date" type="date" name='Date' onChange={handleChange} required />
                                     </div>
                                     <div className="form-group">
                                         <label className="usertodolist-lable">Select Category or add more</label>
                                         <select className="form-select form-select-lg mb-3 " size="5" name="category_id" aria-label=".form-select-lg example" required onChange={handleChange}>
                                             {props.category.map((item, index) =>
-                                                <option key={index} value={item.category_id}>{item.category_name}</option>
+                                                <option id={`todolistadd-category-${index+1}`} key={index} value={item.category_id}>{item.category_name}</option>
                                             )
                                             }
                                         </select>
                                         <button type="button" className="button-32" role="button" onClick={Categortyadd} ><AiOutlinePlus /> Add more category</button>
                                     </div>
                                     <div className='usertodolist-buttoncon'>
-                                        <button type="submit" className="usertodolist-button" >Create</button>
+                                        <button id="todolistadd-confirm-btn" type="submit" className="usertodolist-button" >Create</button>
                                     </div>
                                 </form>
 

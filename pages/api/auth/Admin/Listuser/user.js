@@ -11,5 +11,23 @@ async function listuser(req,res) {
         res.status(500).send("LISTUSER SERVER ERROR !!!")
     }
 }
+// try {
+//     const { cookies } = await req;
+//     const jwt = await cookies.jwt_token
+//     if (!jwt) {
+//         res.status(401).json('your not login')
+//     } else {
+//         const decode = Jwt.verify(jwt, process.env.SECRET_TOKEN)
+//         if (decode.role !== 'a') {
+//             res.status(401).json('your not admin')
+//         } else {
+
+//         }
+//     }
+// } catch (err) {
+//     // console.log(err)
+
+//     res.status(500).send("REQUESTIONTOKEN SERVER ERROR !!!")
+// }
 
 export default listuser

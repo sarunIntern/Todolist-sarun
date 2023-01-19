@@ -9,7 +9,7 @@ function Todolistcategory(props) {
     const router = useRouter()
     const [loading, setLoading] = useState(true);
     var listcount = 0
-    console.log(props)
+  
     useEffect(() => {
         setLoading(false);
     }, [props]);
@@ -83,6 +83,22 @@ function Todolistcategory(props) {
                     icon: 'success',
                     title: res.data
                 })
+                if (props.todolists[0].todolist_status !== 'p') {
+                    todolistlistchangestatus(props.todolists[0].todolist_id, value).then((res) => {
+                        refreshdata()
+                    }).catch((err) => {
+                        Swal.fire({
+                            position: 'top',
+                            title: 'Error!',
+                            text: err.response.data,
+                            icon: 'error',
+                            iconColor: 'Red',
+                            confirmButtonColor: '#3085d6',
+                            confirmButtonText: 'ตกลง'
+                        })
+                        console.log(err)
+                    })
+                }
                 refreshdata()
             }).catch((err) => {
                 Swal.fire({
@@ -125,19 +141,19 @@ function Todolistcategory(props) {
                                     <div key={index2} className="usertodolist-list-content">
                                         <h4>{item2.todolist_name}<AiFillCaretRight /></h4>
                                         {props.lists.map((item, index) =>
-                                            <div key={index} className="form-check">
+                                            <div  key={index} className="form-check">
                                                 {item.lists_status === 'p'
                                                     ? (
 
                                                         <>
-                                                            <input className="form-check-input" value={item.lists_text} type="checkbox" onChange={(event) => handleCheck(event, item.lists_id)} />
+                                                            <input id={`checkbox-${index + 1}`} className="form-check-input" value={item.lists_text} type="checkbox" onChange={(event) => handleCheck(event, item.lists_id)} />
                                                             <label >{item.lists_text}</label>
                                                         </>
                                                     )
                                                     : (
                                                         <>
                                                             {lispluse()}
-                                                            <input checked className="form-check-input" value={item.lists_text} type="checkbox" onChange={(event) => handleCheck(event, item.lists_id)} />
+                                                            <input id={`checkbox-${index + 1}`} checked className="form-check-input" value={item.lists_text} type="checkbox" onChange={(event) => handleCheck(event, item.lists_id)} />
                                                             <label className="checked-item" >{item.lists_text}</label>
 
                                                         </>
@@ -148,9 +164,21 @@ function Todolistcategory(props) {
                                         }
                                         {listcount === props.lists.length
                                             && (
-                                                <div className='listsubmit-buttoncon'>
-                                                    <button className="listsubmit-button" id='listsubmit-Submit' onClick={() => todolistchange(item2.todolist_id)} >Complete!!</button>
-                                                </div>
+                                                <>
+                                                    {props.todolists[0].todolist_status === 's'
+                                                        ? (
+                                                            <div className='listsubmit-buttoncon'>
+                                                                <button disabled className="listsubmit-button" id='listsubmit-Submit' onClick={() => todolistchange(item2.todolist_id)} >This list is already complete!!</button>
+                                                            </div>
+                                                        )
+                                                        :(
+                                                            <div className='listsubmit-buttoncon'>
+                                                                <button className="listsubmit-button" id='listsubmit-Submit' onClick={() => todolistchange(item2.todolist_id)} >Complete!!</button>
+                                                            </div>
+                                                        )
+                                                    }
+
+                                                </>
                                             )
 
                                         }

@@ -1,4 +1,4 @@
-/// <reference types="cypress" />
+/// <reference types="Cypress" />
 
 context('Waiting', () => {
   beforeEach(() => {
@@ -18,14 +18,17 @@ context('Waiting', () => {
   })
 
   it('cy.wait() - wait for a specific route', () => {
+    cy.server()
+
     // Listen to GET to comments/1
-    cy.intercept('GET', '**/comments/*').as('getComment')
+    cy.route('GET', 'comments/*').as('getComment')
 
     // we have code that gets a comment when
     // the button is clicked in scripts.js
     cy.get('.network-btn').click()
 
     // wait for GET comments/1
-    cy.wait('@getComment').its('response.statusCode').should('be.oneOf', [200, 304])
+    cy.wait('@getComment').its('status').should('eq', 200)
   })
+
 })

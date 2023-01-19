@@ -1,14 +1,25 @@
 version: '3.8'
 
 services:
-  cypress:
-    build: ./cypress
+  # cypress:
+  #   image: "cypress/included:12.3.0"
+  #   entrypoint: cypress
+  #   container_name: cypress
+  #   working_dir: /e2e
+  #   volumes:
+  #     - ./:/e2e
+   e2e-chrome:
+    image: "cypress/included:12.3.0"
     container_name: cypress
-    environment:
-      - CYPRESS_BASE_URL=http://localhost:3000
-    # share the current folder as volume to avoid copying
+   
+    command: npx cypress run --browser chrome
+    
+   
     volumes:
       - ./cypress:/cypress
       - ./cypress.config.js:/cypress.config.js
-      - ./package.json:/package.json
+
+
+   
+
 

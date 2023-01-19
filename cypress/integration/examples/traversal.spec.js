@@ -1,4 +1,4 @@
-/// <reference types="cypress" />
+/// <reference types="Cypress" />
 
 context('Traversal', () => {
   beforeEach(() => {
@@ -102,13 +102,13 @@ context('Traversal', () => {
   })
 
   it('.prevAll() - get all previous sibling DOM elements', () => {
-    // https://on.cypress.io/prevall
+    // https://on.cypress.io/prevAll
     cy.get('.fruits-list').find('.third')
       .prevAll().should('have.length', 2)
   })
 
   it('.prevUntil() - get all previous sibling DOM elements until el', () => {
-    // https://on.cypress.io/prevuntil
+    // https://on.cypress.io/prevUntil
     cy.get('.foods-list').find('#nuts')
       .prevUntil('#veggies').should('have.length', 3)
   })

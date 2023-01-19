@@ -52,7 +52,7 @@ function AdmindashboardDetail2(props) {
             confirmButtonColor: '#3085d6',
             confirmButtonText: 'ตกลง'
           })
-          console.log(err)
+          (err)
         })
       }
     }).catch((err) => {
@@ -163,22 +163,25 @@ function AdmindashboardDetail2(props) {
                               }
                               <td className='text-nowrap'>
                                 {item.user_role === 'a'
-                                  ?
-                                  <select
-                                    className="form-select"
-                                    style={{ width: "100px", backgroundColor: "lightgreen" }}
-                                    defaultValue={item.user_role}
-                                    onChange={e => handleChangeRole(e, item.user_id)}
-                                  >
-                                    {roleData.map((item, index) =>
-                                      <option value={item} key={index}>
-                                        {item}
-                                      </option>
-                                    )}
+                                  ? (
+                                    <select
+                                      id={`admin-role-${index + 1}`}
+                                      className="form-select"
+                                      style={{ width: "100px", backgroundColor: "lightgreen" }}
+                                      defaultValue={item.user_role}
+                                      onChange={e => handleChangeRole(e, item.user_id)}
+                                    >
+                                      {roleData.map((item, index) =>
+                                        <option value={item} key={index}>
+                                          {item}
+                                        </option>
+                                      )}
 
-                                  </select>
+                                    </select>
+                                  )
                                   : (
                                     <select
+                                      id={`admin-role-${index + 1}`}
                                       className="form-select"
                                       style={{ width: "100px", backgroundColor: "lightskyblue" }}
                                       defaultValue={item.user_role}
@@ -216,7 +219,7 @@ function AdmindashboardDetail2(props) {
                   <div className="usertodolist-card-header">
                     <h1>All lists</h1>
                   </div>
-                    <div className="cat-search-container">
+                  <div className="cat-search-container">
                     <div className="cat-search-container-sub" >
                       <Dropdown >
                         <Dropdown.Toggle variant="primary" id="dropdown-cat">
@@ -243,7 +246,7 @@ function AdmindashboardDetail2(props) {
                       </Dropdown>
                     </div>
                   </div>
-                  <div className="usertodolist-card-content">
+                  <div id='card-content-list' className="usertodolist-card-content">
                     <h1 className="usertodolist-lable-userdashboard-list">List</h1>
                     {filterCategorymList.map((item, index) =>
                       <div key={index} className="usertodolist-list-content">
@@ -318,9 +321,9 @@ function AdmindashboardDetail2(props) {
 
 export async function getServerSideProps(context) {
   var Token = await context.req.cookies.jwt_token
-    const value ={
-        Cookie:Token
-    }
+  const value = {
+    Cookie: Token
+  }
   const token = await requesttokens(value)
   const verify = await token.data.token
   const { params } = context
@@ -330,20 +333,20 @@ export async function getServerSideProps(context) {
   const categorys = await result2.data.category
   // const result = await listuserID(params.id)
   const posts = await result.data
-  if(posts.length >0){
+  if (posts.length > 0) {
     return {
       props: {
         posts: posts,
         todolists: todolists,
         categorys: categorys,
-        verify:verify
+        verify: verify
       },
     }
   }
   return {
-      notFound: true
+    notFound: true
   };
-  
+
 
 }
 

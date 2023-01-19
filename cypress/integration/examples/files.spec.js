@@ -1,58 +1,58 @@
-/// <reference types="cypress" />
-
-/// JSON fixture file can be loaded directly using
-// the built-in JavaScript bundler
-const requiredExample = require('../../fixtures/example')
+/// <reference types="Cypress" />
 
 context('Files', () => {
   beforeEach(() => {
     cy.visit('https://example.cypress.io/commands/files')
   })
-
-  beforeEach(() => {
-    // load example.json fixture file and store
-    // in the test context object
-    cy.fixture('example.json').as('example')
-  })
-
   it('cy.fixture() - load a fixture', () => {
     // https://on.cypress.io/fixture
 
     // Instead of writing a response inline you can
     // use a fixture file's content.
 
-    // when application makes an Ajax request matching "GET **/comments/*"
-    // Cypress will intercept it and reply with the object in `example.json` fixture
-    cy.intercept('GET', '**/comments/*', { fixture: 'example.json' }).as('getComment')
+    cy.server()
+    cy.fixture('example.json').as('comment')
+    cy.route('GET', 'comments/*', '@comment').as('getComment')
 
     // we have code that gets a comment when
     // the button is clicked in scripts.js
     cy.get('.fixture-btn').click()
 
-    cy.wait('@getComment').its('response.body')
+    cy.wait('@getComment').its('responseBody')
+      .should('have.property', 'name')
+      .and('include', 'Using fixtures to represent data')
+
+    // you can also just write the fixture in the route
+    cy.route('GET', 'comments/*', 'fixture:example.json').as('getComment')
+
+    // we have code that gets a comment when
+    // the button is clicked in scripts.js
+    cy.get('.fixture-btn').click()
+
+    cy.wait('@getComment').its('responseBody')
+      .should('have.property', 'name')
+      .and('include', 'Using fixtures to represent data')
+
+    // or write fx to represent fixture
+    // by default it assumes it's .json
+    cy.route('GET', 'comments/*', 'fx:example').as('getComment')
+
+    // we have code that gets a comment when
+    // the button is clicked in scripts.js
+    cy.get('.fixture-btn').click()
+
+    cy.wait('@getComment').its('responseBody')
       .should('have.property', 'name')
       .and('include', 'Using fixtures to represent data')
   })
 
-  it('cy.fixture() or require - load a fixture', function () {
-    // we are inside the "function () { ... }"
-    // callback and can use test context object "this"
-    // "this.example" was loaded in "beforeEach" function callback
-    expect(this.example, 'fixture in the test context')
-      .to.deep.equal(requiredExample)
-
-    // or use "cy.wrap" and "should('deep.equal', ...)" assertion
-    cy.wrap(this.example)
-      .should('deep.equal', requiredExample)
-  })
-
-  it('cy.readFile() - read file contents', () => {
+  it('cy.readFile() - read a files contents', () => {
     // https://on.cypress.io/readfile
 
     // You can read a file and yield its contents
     // The filePath is relative to your project's root.
-    cy.readFile(Cypress.config('configFile')).then((config) => {
-      expect(config).to.be.an('string')
+    cy.readFile('cypress.json').then((json) => {
+      expect(json).to.be.an('object')
     })
   })
 
@@ -67,7 +67,6 @@ context('Files', () => {
       .then((response) => {
         cy.writeFile('cypress/fixtures/users.json', response.body)
       })
-
     cy.fixture('users').should((users) => {
       expect(users[0].name).to.exist
     })

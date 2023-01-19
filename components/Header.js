@@ -5,7 +5,7 @@ import { requesttoken, logout } from '../function/Auth/Auth';
 import { FiMenu, FiX } from "react-icons/fi";
 import Toast from '../Alert/Success';
 // import Cookies from 'js-cookie'
-function Header() {
+export default function Header() {
     const [click, setClick] = useState(false);
     const [Data, setData] = useState({});
     const [Token, setToken] = useState({});
@@ -23,7 +23,7 @@ function Header() {
             if (res.data !== null) {
                 setData(res.data.Decode)
                 setToken(res.data.token)
-                localStorage.setItem("user_id",res.data.Decode.user_id);
+                localStorage.setItem("user_id", res.data.Decode.user_id);
             } else {
                 setData(null)
                 setToken(null)
@@ -42,7 +42,7 @@ function Header() {
                 icon: 'success',
                 title: res.data
             })
-            localStorage.clear()    
+            localStorage.clear()
             setToken(null)
             router.replace('/Login')
             // router.refresh()
@@ -51,7 +51,7 @@ function Header() {
         })
     }
 
-    function redirect(){
+    function redirect() {
         router.replace(`/user/userdashboard/${Data.user_id}`)
     }
 
@@ -138,5 +138,3 @@ function Header() {
     )
 }
 
-
-export default Header

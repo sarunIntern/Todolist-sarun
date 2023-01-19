@@ -68,23 +68,23 @@ function Usertodolist(props) {
                                         <Dropdown.Toggle variant="primary" id="dropdown-cat">
                                             {catText}
                                         </Dropdown.Toggle>
-                                        <Dropdown.Menu className="scrollable-menu">
+                                        <Dropdown.Menu className="scrollable-menu" id="sss">
                                             {props.categorys.map((item, catindex) =>
-                                                <Dropdown.Item key={catindex} as="button" onClick={(id) => { setSelect(item.category_id); setDropDownText(item.category_name) }}>{item.category_name}</Dropdown.Item>
+                                                <Dropdown.Item id={`category-${catindex+1}`} name={catindex+1} key={catindex} as="button" onClick={() => { setSelect(item.category_id); setDropDownText(item.category_name) }}>{item.category_name}</Dropdown.Item>
                                             )}
-                                            <Dropdown.Item as="button" onClick={(id) => { setSelect(""); setDropDownText("ALL") }}>ALL</Dropdown.Item>
+                                            <Dropdown.Item id="Category-ALL" as="button"  onClick={(id) => { setSelect(""); setDropDownText("ALL") }}>ALL</Dropdown.Item>
                                         </Dropdown.Menu>
                                     </Dropdown>
                                 </div>
                                 <div className="cat-search-container-sub-1" >
                                     <Dropdown >
-                                        <Dropdown.Toggle variant="primary" id="dropdown-cat">
+                                        <Dropdown.Toggle variant="primary" id="dropdown-status">
                                             {status}
                                         </Dropdown.Toggle>
                                         <Dropdown.Menu className="scrollable-menu">
-                                            <Dropdown.Item as="button" onClick={(id) => { setSelect2("p"); setStatus("Pending") }}>Pending</Dropdown.Item>
-                                            <Dropdown.Item as="button" onClick={(id) => { setSelect2("s"); setStatus("Success") }}>Success</Dropdown.Item>
-                                            <Dropdown.Item as="button" onClick={(id) => { setSelect2(""); setStatus("ALL") }}>ALL</Dropdown.Item>
+                                            <Dropdown.Item id="P" as="button" onClick={(id) => { setSelect2("p"); setStatus("Pending") }}>Pending</Dropdown.Item>
+                                            <Dropdown.Item id="S" as="button" onClick={(id) => { setSelect2("s"); setStatus("Success") }}>Success</Dropdown.Item>
+                                            <Dropdown.Item id="status-ALL" as="button" onClick={(id) => { setSelect2(""); setStatus("ALL") }}>ALL</Dropdown.Item>
                                         </Dropdown.Menu>
                                     </Dropdown>
                                 </div>

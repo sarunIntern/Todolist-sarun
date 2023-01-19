@@ -377,7 +377,7 @@ function Todolistedit(props) {
                                     </div>
                                     <div className="form-group">
                                         <label className="usertodolist-lable">Click here to add Task list</label><br />
-                                        <button type="button" className="button-31" role="button" onClick={increase}><AiOutlinePlus /> add list</button>
+                                        <button id="todolistedit-list-btn" type="button" className="button-31" role="button" onClick={increase}><AiOutlinePlus /> add list</button>
                                     </div>
                                     {formFields.map((item, index) =>
                                         <div key={index} className="form-group" style={{ marginTop: '10px' }}>
@@ -438,7 +438,6 @@ function Todolistedit(props) {
                                         <button type="button" className="button-32" role="button" onClick={Categortyadd} ><AiOutlinePlus /> Add more category</button>
                                     </div>
                                 </form>
-
                             </div>
                         </div>
                     </div>

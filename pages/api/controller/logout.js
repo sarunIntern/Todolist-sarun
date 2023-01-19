@@ -7,7 +7,6 @@ export default async function logout (req,res){
         if (!jwt) {
             res.status(400).json("You are not login")
         }else{
-            console.log("kokai")
             res.setHeader('Set-Cookie', cookie.serialize('jwt_token', String(jwt), {
                 httpOnly: true,
                 maxAge: -1 ,

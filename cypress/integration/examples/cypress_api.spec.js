@@ -1,4 +1,4 @@
-/// <reference types="cypress" />
+/// <reference types="Cypress" />
 
 context('Cypress.Commands', () => {
   beforeEach(() => {
@@ -18,6 +18,7 @@ context('Cypress.Commands', () => {
       method = method || 'log'
 
       // log the subject to the console
+      // @ts-ignore TS7017
       console[method]('The subject is', subject)
 
       // whatever we return becomes the new subject
@@ -26,11 +27,13 @@ context('Cypress.Commands', () => {
       return subject
     })
 
+    // @ts-ignore TS2339
     cy.get('button').console('info').then(($button) => {
       // subject is still $button
     })
   })
 })
+
 
 context('Cypress.Cookies', () => {
   beforeEach(() => {
@@ -48,6 +51,42 @@ context('Cypress.Cookies', () => {
     cy.setCookie('fakeCookie', '123ABC')
     cy.clearCookie('fakeCookie')
     cy.setCookie('fakeCookie', '123ABC')
+  })
+
+  it('.preserveOnce() - preserve cookies by key', () => {
+    // normally cookies are reset after each test
+    cy.getCookie('fakeCookie').should('not.be.ok')
+
+    // preserving a cookie will not clear it when
+    // the next test starts
+    cy.setCookie('lastCookie', '789XYZ')
+    Cypress.Cookies.preserveOnce('lastCookie')
+  })
+
+  it('.defaults() - set defaults for all cookies', () => {
+    // now any cookie with the name 'session_id' will
+    // not be cleared before each new test runs
+    Cypress.Cookies.defaults({
+      whitelist: 'session_id',
+    })
+  })
+})
+
+
+context('Cypress.Server', () => {
+  beforeEach(() => {
+    cy.visit('https://example.cypress.io/cypress-api')
+  })
+
+  // Permanently override server options for
+  // all instances of cy.server()
+
+  // https://on.cypress.io/cypress-server
+  it('.defaults() - change default config of server', () => {
+    Cypress.Server.defaults({
+      delay: 0,
+      force404: false,
+    })
   })
 })
 
@@ -147,6 +186,7 @@ context('Cypress.log', () => {
   })
 })
 
+
 context('Cypress.platform', () => {
   beforeEach(() => {
     cy.visit('https://example.cypress.io/cypress-api')
@@ -177,6 +217,6 @@ context('Cypress.spec', () => {
   it('Get current spec information', () => {
     // https://on.cypress.io/spec
     // wrap the object so we can inspect it easily by clicking in the command log
-    cy.wrap(Cypress.spec).should('include.keys', ['name', 'relative', 'absolute'])
+    cy.wrap(Cypress.spec).should('have.keys', ['name', 'relative', 'absolute'])
   })
 })
