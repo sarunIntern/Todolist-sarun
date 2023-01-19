@@ -35,7 +35,7 @@ function AdmindashboardDetail2(props) {
       icon: 'warning',
     }).then((result) => {
       if (result.isConfirmed) {
-        changerole(user_id, value).then((res) => {
+        changerole(props.Token,user_id, value).then((res) => {
           Swal.fire({
             title: 'Changed!',
             text: res.data,
@@ -67,7 +67,7 @@ function AdmindashboardDetail2(props) {
       icon: 'warning',
     }).then((result) => {
       if (result.isConfirmed) {
-        deleteuser(user_id).then((res) => {
+        deleteuser(props.Token,user_id).then((res) => {
           Swal.fire({
             title: 'Deleted!!',
             text: res.data,
@@ -327,8 +327,8 @@ export async function getServerSideProps(context) {
   const token = await requesttokens(value)
   const verify = await token.data.token
   const { params } = context
-  const result = await listuserID(params.user_id)
-  const result2 = await listusertodolistid(params.user_id)
+  const result = await listuserID(Token,params.user_id)
+  const result2 = await listusertodolistid(Token,params.user_id)
   const todolists = await result2.data.todolists
   const categorys = await result2.data.category
   // const result = await listuserID(params.id)
@@ -339,7 +339,8 @@ export async function getServerSideProps(context) {
         posts: posts,
         todolists: todolists,
         categorys: categorys,
-        verify: verify
+        verify: verify,
+        Token:Token
       },
     }
   }

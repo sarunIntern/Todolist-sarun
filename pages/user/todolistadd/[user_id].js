@@ -62,7 +62,7 @@ function Todolistaddid(props) {
         }
         let i = 0
         let Bool = false
-        todolistadds(user_id, Value).then((res) => {
+        todolistadds(props.Token,user_id, Value).then((res) => {
             while (true) {
                 if (i === formFields.length) {
                     console.log([Value.Data])
@@ -74,7 +74,7 @@ function Todolistaddid(props) {
                 }
             }
             if (Bool === true) {
-                listadds(user_id, Value).then((res) => {
+                listadds(props.Token,user_id, Value).then((res) => {
                     Toast.fire({
                         position: 'top-end',
                         icon: 'success',
@@ -123,7 +123,7 @@ function Todolistaddid(props) {
             const payload = {
                 category_name: Name
             }
-            categortyadd(user_id, payload)
+            categortyadd(props.Token,user_id, payload)
                 .then(res => {
                     Swal.fire({
                         title: 'Success!!',
@@ -224,7 +224,7 @@ export async function getServerSideProps(context) {
     const token = await requesttokens(value)
     const verify = await token.data.token
     const { params } = context
-    const cat = await listcategory(params.user_id)
+    const cat = await listcategory(Token,params.user_id)
     const category = await cat.data.catnull
     // const result = await listnullcategory()
     // const user = await result.data.user
@@ -234,7 +234,8 @@ export async function getServerSideProps(context) {
         return {
             props: {
                 category: category,
-                verify: verify
+                verify: verify,
+                Token:Token
                 // verified: verified,
                 // admin: admin
             },

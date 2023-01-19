@@ -45,7 +45,7 @@ function Todolistedit(props) {
             const payload = {
                 lists_text:Text
             }
-            listaddsone(todolist_id,payload)
+            listaddsone(props.Token,todolist_id,payload)
                 .then(res => {
                     Swal.fire({
                         title: 'Success!!',
@@ -71,7 +71,7 @@ function Todolistedit(props) {
             icon: 'warning',
         }).then((result) => {
             if (result.isConfirmed) {
-                listdeletesone(lists_id).then((res) => {
+                listdeletesone(props.Token,lists_id).then((res) => {
                     Swal.fire({
                         title: 'Deleted!!',
                         text: res.data,
@@ -112,7 +112,7 @@ function Todolistedit(props) {
             const payload = {
                lists_text: Text
             }
-            listeditone(lists_id, payload)
+            listeditone(props.Token,lists_id, payload)
                 .then(res => {
                     Swal.fire({
                         title: 'Success!!',
@@ -146,7 +146,7 @@ function Todolistedit(props) {
             const payload = {
                 category_name: Name
             }
-            categortyadd(user_id, payload)
+            categortyadd(props.Token,user_id, payload)
                 .then(res => {
                     Swal.fire({
                         title: 'Success!!',
@@ -181,7 +181,7 @@ function Todolistedit(props) {
                 icon: 'warning',
             }).then((result) => {
                 if (result.isConfirmed) {
-                    todolisteditname(todolist_id, value).then((res) => {
+                    todolisteditname(props.Token,todolist_id, value).then((res) => {
                         Swal.fire({
                             title: 'Changed!',
                             text: res.data,
@@ -224,7 +224,7 @@ function Todolistedit(props) {
                 icon: 'warning',
             }).then((result) => {
                 if (result.isConfirmed) {
-                    todolisteditduedate(todolist_id, value).then((res) => {
+                    todolisteditduedate(props.Token,todolist_id, value).then((res) => {
                         Swal.fire({
                             title: 'Changed!',
                             text: res.data,
@@ -267,7 +267,7 @@ function Todolistedit(props) {
             const payload = {
                 category_name: Name
             }
-            categortyeditname(catfk.category_id, payload)
+            categortyeditname(props.Token,catfk.category_id, payload)
                 .then(res => {
                     Swal.fire({
                         title: 'Success!!',
@@ -289,7 +289,7 @@ function Todolistedit(props) {
             icon: 'warning',
         }).then((result) => {
             if (result.isConfirmed) {
-                categorydelete(catfk.category_id).then((res) => {
+                categorydelete(props.Token,catfk.category_id).then((res) => {
                     Swal.fire({
                         title: 'Deleted!!',
                         text: res.data,
@@ -323,7 +323,7 @@ function Todolistedit(props) {
             icon: 'warning',
         }).then((result) => {
             if (result.isConfirmed) {
-                todolisteditcategory(todolist_id, value).then((res) => {
+                todolisteditcategory(props.Token,todolist_id, value).then((res) => {
                     Swal.fire({
                         title: 'Changed!!',
                         text: res.data,
@@ -454,7 +454,7 @@ export async function getServerSideProps(context) {
     const token = await requesttokens(value)
     const verify = await token.data.token
     const { params } = context
-    const result = await todlistedit(params.todolist_id)
+    const result = await todlistedit(Token,params.todolist_id)
     const category = await result.data.category
     const todolists = await result.data.todolists
     const lists = await result.data.lists
@@ -466,7 +466,8 @@ export async function getServerSideProps(context) {
                 todolists: todolists,
                 lists: lists,
                 categoryname: categoryname,
-                verify:verify
+                verify:verify,
+                Token:Token
     
             },
         }

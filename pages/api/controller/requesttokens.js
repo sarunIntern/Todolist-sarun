@@ -5,9 +5,12 @@ export default async function requesttokens(req,res){
         if (!Cookie) {
             res.status(200).json(null)
         }else{
-            const { payload } = await jose.jwtVerify(Cookie, new TextEncoder().encode(process.env.SECRET_TOKEN));
-            // const decode = Jwt.verify(Token,process.env.SECRET_TOKEN)
-            res.status(200).json({token:payload})
+            try{
+                const decode = jose.jwtVerify(Cookie, new TextEncoder().encode(process.env.SECRET_TOKEN))
+                res.status(200).json({token:Cookie,Decode:decode})
+            }catch(error){
+                res.redirect(401, 'http://localhost:3000/Loadtoredirect2')
+            }
         }
         
     } catch (err) {

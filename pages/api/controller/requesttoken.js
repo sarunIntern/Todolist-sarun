@@ -6,8 +6,13 @@ export default async function requesttoken(req,res){
         if (!jwt) {
             res.status(200).json(null)
         }else{
-            const decode = Jwt.verify(jwt,process.env.SECRET_TOKEN)
-            res.status(200).json({token:jwt,Decode:decode})
+            try{
+                const decode = Jwt.verify(jwt,process.env.SECRET_TOKEN)
+                res.status(200).json({token:jwt,Decode:decode})
+            }catch(error){
+                res.status(401).json('Token invalid')
+            }
+            
         }
     } catch (err) {
         // console.log(err)

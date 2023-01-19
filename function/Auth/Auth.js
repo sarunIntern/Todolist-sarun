@@ -19,7 +19,7 @@ export const requesttoken= async () =>
   await axios.get(process.env.NEXT_PUBLIC_APP_APIIN+ "/controller/requesttoken");
 
 export const requesttokens= async (value) =>
-  await axios.post(process.env.NEXT_PUBLIC_APP_APIIN+ "/controller/requesttokens",value);
+  await axios.post(process.env.NEXT_PUBLIC_APP_API+ "/controller/requesttokens",value);
 
 
 

@@ -248,7 +248,8 @@ function Admindashboard(props) {
 }
 
 export async function getServerSideProps() {
-  const result = await listuser()
+  var Token = await context.req.cookies.jwt_token
+  const result = await listuser(Token)
   const user = await result.data.user
   const verified = await result.data.verified
   const admin = await result.data.admin

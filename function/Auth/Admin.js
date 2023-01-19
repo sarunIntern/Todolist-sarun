@@ -1,10 +1,28 @@
 import axios from 'axios';
 
-export const changerole = async (id,value) =>
-  await axios.post(process.env.NEXT_PUBLIC_APP_APIIN + "/auth/Admin/Changerole/"+id,value)
+export const changerole = async (authentoken,id,value) =>
+  await axios.post(process.env.NEXT_PUBLIC_APP_APIIN + "/auth/Admin/Changerole/"+id,value,
+  {
+    headers: {
+      Token:authentoken
+    }
+  }
+  )
 
-export const deleteuser = async (id) =>
-  await axios.delete(process.env.NEXT_PUBLIC_APP_APIIN + "/auth/Admin/Delete/"+id)
+export const deleteuser = async (authentoken,id) =>
+  await axios.delete(process.env.NEXT_PUBLIC_APP_APIIN + "/auth/Admin/Delete/"+id,
+  {
+    headers: {
+      Token:authentoken
+    }
+  }
+  )
   
-  export const listusertodolist = async () =>
-  await axios.get(process.env.NEXT_PUBLIC_APP_API+ "/auth/User/Listtodolist/todolist")
+  export const listusertodolist = async (authentoken) =>
+  await axios.get(process.env.NEXT_PUBLIC_APP_API+ "/auth/User/Listtodolist/todolist",
+  {
+    headers: {
+      Token:authentoken
+    }
+  }
+  )

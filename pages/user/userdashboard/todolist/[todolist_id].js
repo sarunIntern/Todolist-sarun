@@ -19,7 +19,7 @@ function Todolistcategory(props) {
         const value = {
             Value: "s"
         }
-        todolistlistchangestatus(todolist_id, value).then((res) => {
+        todolistlistchangestatus(props.Token,todolist_id, value).then((res) => {
             Toast.fire({
                 position: 'top-end',
                 icon: 'success',
@@ -54,7 +54,7 @@ function Todolistcategory(props) {
             const value = {
                 Value: "s"
             }
-            Listchangestatus(lists_id, value).then((res) => {
+            Listchangestatus(props.Token,lists_id, value).then((res) => {
                 Toast.fire({
                     position: 'top-end',
                     icon: 'success',
@@ -77,7 +77,7 @@ function Todolistcategory(props) {
             const value = {
                 Value: "p"
             }
-            Listchangestatus(lists_id, value).then((res) => {
+            Listchangestatus(props.Token,lists_id, value).then((res) => {
                 Toast.fire({
                     position: 'top-end',
                     icon: 'success',
@@ -203,7 +203,7 @@ export async function getServerSideProps(context) {
     const token = await requesttokens(value)
     const verify = await token.data.token
     const { params } = context
-    const result = await listusertodolistid2(params.todolist_id)
+    const result = await listusertodolistid2(Token,params.todolist_id)
     const todolists = await result.data.todolists
     const category = await result.data.category
     const lists = await result.data.lists
@@ -215,7 +215,8 @@ export async function getServerSideProps(context) {
                 todolists: todolists,
                 lists: lists,
                 category: category,
-                verify: verify
+                verify: verify,
+                Token:Token
             },
         }
     } return {
