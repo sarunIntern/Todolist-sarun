@@ -33,12 +33,9 @@ export default async function login(req, res) {
                             maxAge: (60 * 60 * 1) + 10,
                             path:"/",  // 1 week
                           }));
-                     
                         res.status(200).json({ token, payload });
                     });
-                    
                 }
-
             } else {
                 res.status(400).send("You are not verify in your email please check your email")
                 // res.status(200).send(user)

@@ -26,3 +26,20 @@ export const deleteuser = async (authentoken,id) =>
     }
   }
   )
+  export const listusers = async (authentoken) =>
+  await axios.get(process.env.NEXT_PUBLIC_APP_APIIN+ "/auth/Admin/Listuser",
+  {
+    headers: {
+      Token:authentoken
+    }
+  }
+  )
+
+export const listuserID= async (authentoken,id) =>
+  await axios.get(process.env.NEXT_PUBLIC_APP_API+"/auth/Admin/Listuser/"+id,
+  {
+    headers: {
+      Token:authentoken
+    }
+  }
+  );

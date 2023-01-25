@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { listuserID } from '../../../function/User'
+import { listuserID } from '../../../function/Auth/Admin';
 import * as moment from 'moment';
 import { changerole, deleteuser } from '../../../function/Auth/Admin';
 import { listusertodolistid } from "../../../function/Auth/User"

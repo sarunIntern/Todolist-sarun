@@ -160,13 +160,13 @@ export async function getServerSideProps(context) {
   const token = await requesttokens(value)
   const verify = await token.data.token
     const { params } = context
-    const result = await listusertodolistid2(params.todolist_id)
+    const result = await listusertodolistid2(Token,params.todolist_id)
     const todolists = await result.data.todolists
     const category = await result.data.category
     const lists = await result.data.lists
     // const verified = await result.data.verified
     // const admin = await result.data.admin
-    if(todolists.length >0){
+    if(todolists.length > 0){
         return {
             props: {
                 todolists: todolists,

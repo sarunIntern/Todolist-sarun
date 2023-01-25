@@ -48,8 +48,8 @@ services:
       POSTGRES_PASSWORD: 4144
       POSTGRES_HOST: psql14
       POSTGRES_DB: todolistsdb
-      NEXT_PUBLIC_APP_API: http://127.0.0.1:3000/api
-      NEXT_PUBLIC_APP_APIIN: http://localhost:3000/api
+      NEXT_PUBLIC_APP_API: http://web:3000/api
+      NEXT_PUBLIC_APP_APIIN: http://web:3000/api
       # DATABASE_URL: postgres://postgres:4144d@psql14:5432/todolistsdb
 
 volumes:

@@ -1,9 +1,9 @@
 /// <reference types="cypress" />
 describe('Test login verify and permistion Admin', () => {
-    beforeEach(() => {
-        cy.visit('/')
-        cy.wait(2000)
-    })
+    // beforeEach(() => {
+    //     cy.visit('/')
+    //     cy.wait(2000)
+    // })
 
     // it('No login permistion', () => {
     //     cy.get('#mobile-menu').click({ force: true })
@@ -30,6 +30,8 @@ describe('Test login verify and permistion Admin', () => {
     // })
 
     it('Admin interact user', () => {
+        cy.visit('/')
+        cy.wait(2000)
         cy.get('#mobile-menu').click({ force: true })
         cy.wait(1000)
         cy.get('#Login-header').click()

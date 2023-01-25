@@ -90,7 +90,7 @@ export default function Header() {
                                 <div className="header-con">
                                     <ul className={click ? "menu active" : " menu"}>
                                         <li className="menu-link" onClick={closeMobileMenu}>
-                                            <Link id='user-dashboard' href="/" onClick={redirect}>Dashboard</Link>
+                                            <Link id='user-dashboard' href="#" onClick={redirect}>Dashboard</Link>
                                         </li>
                                         <li className="menu-link" onClick={closeMobileMenu}>
                                             <Link href="/" onClick={logouts} id='Logout-header'>Logout</Link>

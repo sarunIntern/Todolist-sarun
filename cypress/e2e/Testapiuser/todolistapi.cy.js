@@ -5,7 +5,7 @@ describe('Test user api', () => {
         
         cy.request({
             method:'GET',
-            url:'http://localhost:3000/api/auth/User/Listtodolist/todolist',
+            url:'/api/auth/User/Listtodolist/1',
             headers:{Token:Cypress.env('Token')},
             
         }).then((Response)=>{

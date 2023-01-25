@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react'
-import { listuser } from '../../../function/User'
+import { listusers } from '../../../function/Auth/Admin';
 import * as moment from 'moment';
 import { changerole, deleteuser } from '../../../function/Auth/Admin';
+import { requesttokens } from '../../../function/Auth/Auth';
 import { AiFillDelete, AiOutlineEye } from "react-icons/ai";
 import { BsFillPersonFill, BsCheckLg } from "react-icons/bs";
 import { RiAdminFill } from "react-icons/ri";
@@ -33,7 +34,7 @@ function Admindashboard(props) {
       icon: 'warning',
     }).then((result) => {
       if (result.isConfirmed) {
-        changerole(user_id, value).then((res) => {
+        changerole(props.token, user_id, value).then((res) => {
           Swal.fire({
             title: 'Changed!',
             text: res.data,
@@ -65,7 +66,7 @@ function Admindashboard(props) {
       icon: 'warning',
     }).then((result) => {
       if (result.isConfirmed) {
-        deleteuser(user_id).then((res) => {
+        deleteuser(props.token, user_id).then((res) => {
           Swal.fire({
             title: 'Deleted!!',
             text: res.data,
@@ -125,7 +126,7 @@ function Admindashboard(props) {
                   </div>
                   <div className='admindashboard-usercard-subheader'>
                     <div className="admindashboard-usercard-sub-header-two-user">
-                      <div>Have {props.posts.length} user</div>
+                      <div>Have {props.users.length} user</div>
                     </div>
                     <div className="admindashboard-usercard-sub-header-two-admin">
                       <div>Have {props.admin.length} admin</div>
@@ -147,7 +148,7 @@ function Admindashboard(props) {
                       <div>{props.verified.length} verification</div>
                     </div>
                     <div className="admindashboard-usercard-sub-header-two-verify">
-                      <div>{props.posts.length - props.verified.length} Not verification</div>
+                      <div>{props.users.length - props.verified.length} Not verification</div>
                     </div>
                   </div>
                 </div>
@@ -173,7 +174,7 @@ function Admindashboard(props) {
                         </tr>
                       </thead>
                       <tbody>
-                        {props.posts.map((item, index) =>
+                        {props.users.map((item, index) =>
                           <tr key={index}>
                             <th scope="row">{index + 1}</th>
                             <td className='text-nowrap'>{item.username}</td>
@@ -187,7 +188,7 @@ function Admindashboard(props) {
                               {item.user_role === 'a'
                                 ?
                                 <select
-                                id={`admin-role-${index + 1}`}
+                                  id={`admin-role-${index + 1}`}
                                   className="form-select"
                                   style={{ width: "100px", backgroundColor: "lightgreen" }}
                                   defaultValue={item.user_role}
@@ -202,7 +203,7 @@ function Admindashboard(props) {
                                 </select>
                                 : (
                                   <select
-                                  id={`admin-role-${index + 1}`}
+                                    id={`admin-role-${index + 1}`}
                                     className="form-select"
                                     style={{ width: "100px", backgroundColor: "lightskyblue" }}
                                     defaultValue={item.user_role}
@@ -226,7 +227,7 @@ function Admindashboard(props) {
                                   <button type="button" className="btn btn-danger"> <AiFillDelete onClick={() => handleRemove(item.user_id)} /> </button>
                                 </div>
                                 <div className='admindashboard-function-con'>
-                                  <button id={`admin-seeuser-btn-${index+1}`} type="button" className="btn btn-secondary"> <AiOutlineEye onClick={() => handleInfo(item.user_id)} /> </button>
+                                  <button id={`admin-seeuser-btn-${index + 1}`} type="button" className="btn btn-secondary"> <AiOutlineEye onClick={() => handleInfo(item.user_id)} /> </button>
                                 </div>
                               </div>
                             </td>
@@ -247,18 +248,30 @@ function Admindashboard(props) {
   )
 }
 
-export async function getServerSideProps() {
-  var Token = await context.req.cookies.jwt_token
-  const result = await listuser(Token)
-  const user = await result.data.user
+export async function getServerSideProps(context) {
+  const Token = await context.req.cookies.jwt_token
+  const value = {
+    Cookie: Token
+  }
+  const request = await requesttokens(value)
+  const token = await request.data.token
+
+  const result = await listusers(Token)
+  const users = await result.data.users
   const verified = await result.data.verified
   const admin = await result.data.admin
+
+  const posts = await result.data
+  // if (posts.length > 0) {
   return {
     props: {
-      posts: user,
+      token: token,
+      posts: posts,
+      users: users,
       verified: verified,
       admin: admin
     },
   }
+  // }
 }
 export default Admindashboard

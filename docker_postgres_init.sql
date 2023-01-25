@@ -78,3 +78,7 @@ INSERT INTO category (category_name) VALUES
 ('Travel🧳'),
 ('Work💻'),
 ('ETC🗿');
+
+INSERT INTO users (username,user_password,user_email,user_status,user_role) VALUES
+('sarun4144','$2b$10$Z8GNyAKEgVuEUKYQ6YbRQuD9/PRMS0pv.TRQLZCdsEZmHkPM3mvY.','sarun4144@gmail.com',true,'u'),
+('admin01','$2b$10$1HQhK6BAUpP.pOfwpTmRbuJaG0pTiAVE2bOi50qprFS.UvpngPO/G','admin@email.com',true,'a')

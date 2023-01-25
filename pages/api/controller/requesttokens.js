@@ -1,4 +1,4 @@
-const jose = require('jose')
+const Jwt = require('jsonwebtoken')
 export default async function requesttokens(req,res){
       const {Cookie} = await req.body
     try {
@@ -6,8 +6,8 @@ export default async function requesttokens(req,res){
             res.status(200).json(null)
         }else{
             try{
-                const decode = jose.jwtVerify(Cookie, new TextEncoder().encode(process.env.SECRET_TOKEN))
-                res.status(200).json({token:Cookie,Decode:decode})
+                const decode = Jwt.verify(Cookie,process.env.SECRET_TOKEN)
+                res.status(200).json({token:Cookie,decode:decode})
             }catch(error){
                 res.redirect(401, 'http://localhost:3000/Loadtoredirect2')
             }

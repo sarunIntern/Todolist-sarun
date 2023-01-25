@@ -8,14 +8,17 @@ services:
   #   working_dir: /e2e
   #   volumes:
   #     - ./:/e2e
-   e2e-chrome:
+  cypress:
     image: "cypress/included:12.3.0"
     container_name: cypress
-   
-    command: npx cypress run --browser chrome
-    
-   
+
+    environment:
+      - CYPRESS_baseUrl=http://localhost:3000
+
+    # command: npx cypress run --browser chrome
+    working_dir: /e2e
     volumes:
+      - ./:/e2e
       - ./cypress:/cypress
       - ./cypress.config.js:/cypress.config.js
 

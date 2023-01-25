@@ -12,7 +12,7 @@ function Usertodolist(props) {
     const router = useRouter()
     const { user_id } = router.query
     const [loading, setLoading] = useState(true);
-    // console.log(props)
+    console.log(props)
 
 
     useEffect(() => {
@@ -171,13 +171,13 @@ export async function getServerSideProps(context) {
     }
     // console.log("TOKEN GETSERVERSIDE :",Token)
     const token = await requesttokens(value)
-    const verify = await token.data.token
+    const verify = await token.data
     const { params } = context
     const result = await listusertodolistid(Token,params.user_id)
     const user = await result.data.user
     const todolists = await result.data.todolists
     const categorys = await result.data.category
-    if(params.user_id == verify.user_id ){
+    // if(params.user_id === verify.user_id ){
         return {
             props: {
                 todolists: todolists,
@@ -186,11 +186,11 @@ export async function getServerSideProps(context) {
                 Token:Token
             },
         }
-    }
+    // }
 
-    return {
-        notFound: true
-    };
+    // return {
+    //     notFound: true
+    // };
     // const verified = await result.data.verified
     // const admin = await result.data.admin
 }
