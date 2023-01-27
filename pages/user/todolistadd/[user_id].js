@@ -62,19 +62,23 @@ function Todolistaddid(props) {
         }
         let i = 0
         let Bool = false
-        todolistadds(props.Token,user_id, Value).then((res) => {
+        todolistadds(props.Token,user_id,Value).then((res) => {
             while (true) {
                 if (i === formFields.length) {
                     console.log([Value.Data])
                     Bool = true
                     break;
                 } else {
-                    Value.Data[i] = [formFields[i].input, res.data.todolist_id]
+                    Value.Data[i] = [formFields[i].input,res.data.category_user_id.fk_todolist_user_id,res.data.category_user_id.fk_category_id,res.data.todolist_id]
                     i += 1;
                 }
             }
+            
             if (Bool === true) {
-                listadds(props.Token,user_id, Value).then((res) => {
+                console.log("Value",Value)
+                // document.getElementById("myForm").reset();
+                // setFormFields([{ input: '' }])
+                listadds(props.Token,user_id,Value).then((res) => {
                     Toast.fire({
                         position: 'top-end',
                         icon: 'success',
@@ -222,7 +226,7 @@ export async function getServerSideProps(context) {
         Cookie: Token
     }
     const token = await requesttokens(value)
-    const verify = await token.data.token
+    const verify = await token.data.decode
     const { params } = context
     const cat = await listcategory(Token,params.user_id)
     const category = await cat.data.catnull

@@ -25,7 +25,9 @@ const LoadingToRedirect = () => {
           }).then((result) => {
             if (result.dismiss === Swal.DismissReason.timer) {
                 router.replace('/')
-            
+                if(window.location.pathname === '/'){
+                  window.location.reload();
+                }
               
             }
         

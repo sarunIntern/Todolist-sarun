@@ -201,7 +201,7 @@ export async function getServerSideProps(context) {
         Cookie: Token
     }
     const token = await requesttokens(value)
-    const verify = await token.data.token
+    const verify = await token.data.decode  
     const { params } = context
     const result = await listusertodolistid2(Token,params.todolist_id)
     const todolists = await result.data.todolists

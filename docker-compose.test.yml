@@ -13,7 +13,7 @@ services:
     container_name: cypress
 
     environment:
-      - CYPRESS_baseUrl=http://localhost:3000
+      - CYPRESS_baseUrl=http://web:3000
 
     # command: npx cypress run --browser chrome
     working_dir: /e2e

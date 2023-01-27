@@ -9,7 +9,7 @@ export default async function middleware(req) {
     //get(cookie name)
     const cookies = await req.cookies.get("jwt_token")?.value
     const url = await req.url;
-    const token = await req.headers.get('Token')
+    const token = await req.headers.get('token')
 
     //ดักที่ตัว /admin
     if (url.includes('/admin')) {

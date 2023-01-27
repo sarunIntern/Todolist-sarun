@@ -3,8 +3,10 @@ import Toast from "../../../Alert/Success";
 import Confirm from "../../../Alert/Confirm"
 import Swal from "sweetalert2";
 import { AiOutlinePlus, AiFillDelete, AiFillEdit } from "react-icons/ai";
-import { todlistedit, todolisteditname, todolisteditduedate, todolisteditcategory, categortyadd, categortyeditname, categorydelete 
-,listaddsone,listdeletesone,listeditone} from "../../../function/Auth/User";
+import {
+    todlistedit, todolisteditname, todolisteditduedate, todolisteditcategory, categortyadd, categortyeditname, categorydelete
+    , listaddsone, listdeletesone, listeditone
+} from "../../../function/Auth/User";
 
 import { requesttokens } from "../../../function/Auth/Auth";
 import { useRouter } from "next/router";
@@ -21,6 +23,7 @@ function Todolistedit(props) {
     const [Value, setValue] = useState({})
 
     console.log(props)
+    console.log("Catfk", catfk)
     useEffect(() => {
         setFormFields(props.lists)
         setLoading(false)
@@ -32,7 +35,7 @@ function Todolistedit(props) {
         router.replace(router.asPath);
     }
 
-  async function increase() {
+    async function increase() {
         const { value: Text } = await Swal.fire({
             title: 'List add',
             input: 'text',
@@ -43,9 +46,9 @@ function Todolistedit(props) {
         })
         if (Text) {
             const payload = {
-                lists_text:Text
+                lists_text: Text
             }
-            listaddsone(props.Token,todolist_id,payload)
+            listaddsone(props.Token, todolist_id, payload)
                 .then(res => {
                     Swal.fire({
                         title: 'Success!!',
@@ -64,14 +67,14 @@ function Todolistedit(props) {
         // setFormFields([...formFields, object])
     }
 
-    const deleteInput = (index,lists_id) => {
+    const deleteInput = (index, lists_id) => {
         Confirm.fire({
             title: 'Confirm!!',
             text: "Do you want to delete list task ?",
             icon: 'warning',
         }).then((result) => {
             if (result.isConfirmed) {
-                listdeletesone(props.Token,lists_id).then((res) => {
+                listdeletesone(props.Token, lists_id).then((res) => {
                     Swal.fire({
                         title: 'Deleted!!',
                         text: res.data,
@@ -99,7 +102,7 @@ function Todolistedit(props) {
         // setFormFields(data)
     }
 
-    async function editlists(lists_id){
+    async function editlists(lists_id) {
         const { value: Text } = await Swal.fire({
             title: 'List edit ',
             input: 'text',
@@ -110,9 +113,9 @@ function Todolistedit(props) {
         })
         if (Text) {
             const payload = {
-               lists_text: Text
+                lists_text: Text
             }
-            listeditone(props.Token,lists_id, payload)
+            listeditone(props.Token, lists_id, payload)
                 .then(res => {
                     Swal.fire({
                         title: 'Success!!',
@@ -146,7 +149,7 @@ function Todolistedit(props) {
             const payload = {
                 category_name: Name
             }
-            categortyadd(props.Token,user_id, payload)
+            categortyadd(props.Token, user_id, payload)
                 .then(res => {
                     Swal.fire({
                         title: 'Success!!',
@@ -181,7 +184,7 @@ function Todolistedit(props) {
                 icon: 'warning',
             }).then((result) => {
                 if (result.isConfirmed) {
-                    todolisteditname(props.Token,todolist_id, value).then((res) => {
+                    todolisteditname(props.Token, todolist_id, value).then((res) => {
                         Swal.fire({
                             title: 'Changed!',
                             text: res.data,
@@ -224,7 +227,7 @@ function Todolistedit(props) {
                 icon: 'warning',
             }).then((result) => {
                 if (result.isConfirmed) {
-                    todolisteditduedate(props.Token,todolist_id, value).then((res) => {
+                    todolisteditduedate(props.Token, todolist_id, value).then((res) => {
                         Swal.fire({
                             title: 'Changed!',
                             text: res.data,
@@ -250,7 +253,7 @@ function Todolistedit(props) {
         }
     }
     function categoryeditselect(category_id, fk_user_id) {
-        console.log(category_id, fk_user_id)
+
         setCatfk({ category_id: category_id, fk_user_id: fk_user_id })
     }
     async function categoryedit() {
@@ -267,7 +270,7 @@ function Todolistedit(props) {
             const payload = {
                 category_name: Name
             }
-            categortyeditname(props.Token,catfk.category_id, payload)
+            categortyeditname(props.Token, catfk.category_id, payload)
                 .then(res => {
                     Swal.fire({
                         title: 'Success!!',
@@ -289,7 +292,7 @@ function Todolistedit(props) {
             icon: 'warning',
         }).then((result) => {
             if (result.isConfirmed) {
-                categorydelete(props.Token,catfk.category_id).then((res) => {
+                categorydelete(props.Token, catfk.category_id).then((res) => {
                     Swal.fire({
                         title: 'Deleted!!',
                         text: res.data,
@@ -319,11 +322,11 @@ function Todolistedit(props) {
         }
         Confirm.fire({
             title: 'Confirm!!',
-            text: "Do you want to delete category ?",
+            text: "Do you want to Change category ?",
             icon: 'warning',
         }).then((result) => {
             if (result.isConfirmed) {
-                todolisteditcategory(props.Token,todolist_id, value).then((res) => {
+                todolisteditcategory(props.Token, todolist_id, value).then((res) => {
                     Swal.fire({
                         title: 'Changed!!',
                         text: res.data,
@@ -347,7 +350,7 @@ function Todolistedit(props) {
             console.log(err)
         })
     }
-  
+
     return (
         <>
             {loading == true ? (
@@ -383,11 +386,11 @@ function Todolistedit(props) {
                                         <div key={index} className="form-group" style={{ marginTop: '10px' }}>
                                             <div className="input-group mb-3">
                                                 <div className="input-group-prepend">
-                                                <button type="button" className="btn btn-secondary" onClick={()=>editlists(item.lists_id)}> <AiFillEdit /> </button>
+                                                    <button type="button" className="btn btn-secondary" onClick={() => editlists(item.lists_id)}> <AiFillEdit /> </button>
                                                 </div>
                                                 <input id="myForm" required type="text" className="form-control" name={`input`} disabled value={item.lists_text} />
                                                 <div className="input-group-append">
-                                                    <button type="button" className="btn btn-danger" onClick={() => deleteInput(index,item.lists_id)}> <AiFillDelete /> </button>
+                                                    <button type="button" className="btn btn-danger" onClick={() => deleteInput(index, item.lists_id)}> <AiFillDelete /> </button>
                                                 </div>
                                             </div>
                                         </div>
@@ -404,7 +407,7 @@ function Todolistedit(props) {
                                     <div className="form-group">
                                         <label className="usertodolist-lable">Select Category or add more</label>
                                         <br />
-                                        <label className="usertodolist-lable">Your current category is '{props.categoryname[0].category_name}'</label>
+                                        <label className="usertodolist-lable">Your current category is ' {props.categoryname[0].category_name} '</label>
                                         <select className="form-select form-select-lg mb-3 " size="5" name="category_id" aria-label=".form-select-lg example" required onChange={handleChange}>
                                             {props.category.map((item, index) =>
                                                 <option key={index} onClick={() => categoryeditselect(item.category_id, item.fk_user_id)}>{item.category_name}</option>
@@ -415,18 +418,36 @@ function Todolistedit(props) {
                                             && (
                                                 <>
                                                     {catfk.fk_user_id !== null
+
                                                         ? (
-                                                            <div className='usertodolist-buttoncon-duedate'>
-                                                                <button type="button" className="usertodolist-button-category" onClick={categoryedit}><AiFillEdit /> Edit Category {Value.category_id}</button>
-                                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                                <button type="button" className="usertodolist-button-duedate-delete" onClick={Categorydelete} > <AiFillDelete /> Delete category {Value.category_id}</button>
-                                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                                <button type="button" className="usertodolist-button-category-confirm" onClick={editcategory} > Change category to {Value.category_id}</button>
-                                                            </div>
+                                                            <>
+
+                                                                <div className='usertodolist-buttoncon-duedate'>
+                                                                    <button type="button" className="usertodolist-button-category" onClick={categoryedit}><AiFillEdit /> Edit Category {Value.category_id}</button>
+                                                                    {catfk.category_id !== props.categoryname[0].category_id
+                                                                        && (
+                                                                            <>
+                                                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                                                <button type="button" className="usertodolist-button-duedate-delete" onClick={Categorydelete} > <AiFillDelete /> Delete category {Value.category_id}</button>
+
+                                                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                                                <button type="button" className="usertodolist-button-category-confirm" onClick={editcategory} > Change category to {Value.category_id}</button>
+                                                                            </>
+                                                                        )
+                                                                    }
+                                                                </div>
+                                                            </>
                                                         )
                                                         : (
                                                             <div className='usertodolist-buttoncon-duedate'>
-                                                                <button type="button" className="usertodolist-button-category-confirm" onClick={editcategory} > Change category to {Value.category_id}</button>
+                                                                {catfk.category_id !== props.categoryname[0].category_id
+                                                                    && (
+                                                                        <>
+                                                                            <button type="button" className="usertodolist-button-category-confirm" onClick={editcategory} > Change category to {Value.category_id}</button>
+                                                                        </>
+                                                                    )
+                                                                }
+
                                                             </div>
                                                         )
                                                     }
@@ -452,9 +473,9 @@ export async function getServerSideProps(context) {
         Cookie: Token
     }
     const token = await requesttokens(value)
-    const verify = await token.data.token
+    const verify = await token.data.decode
     const { params } = context
-    const result = await todlistedit(Token,params.todolist_id)
+    const result = await todlistedit(Token, params.todolist_id)
     const category = await result.data.category
     const todolists = await result.data.todolists
     const lists = await result.data.lists
@@ -466,9 +487,9 @@ export async function getServerSideProps(context) {
                 todolists: todolists,
                 lists: lists,
                 categoryname: categoryname,
-                verify:verify,
-                Token:Token
-    
+                verify: verify,
+                Token: Token
+
             },
         }
     }
@@ -476,6 +497,6 @@ export async function getServerSideProps(context) {
         notFound: true
     };
 
-   
+
 }
 export default Todolistedit;

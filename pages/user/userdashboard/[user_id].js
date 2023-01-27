@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
 import Toast from "../../../Alert/Success";
+import Confirm from "../../../Alert/Confirm";
 import Swal from "sweetalert2";
-import { AiOutlinePlus, AiFillDelete, AiFillCaretRight } from "react-icons/ai";
+import { AiOutlinePlus, AiFillDelete, AiFillCaretRight,AiFillEdit } from "react-icons/ai";
 import { requesttokens } from "../../../function/Auth/Auth";
-import { listusertodolistid } from "../../../function/Auth/User"
+import { listusertodolistid,todolistdelete } from "../../../function/Auth/User"
 import { useRouter } from "next/router";
 import Dropdown from 'react-bootstrap/Dropdown';
 import * as moment from 'moment';
@@ -18,6 +19,10 @@ function Usertodolist(props) {
     useEffect(() => {
         setLoading(false);
     }, [props]);
+    function refreshdata() {
+        setLoading(true);
+        router.replace(router.asPath);
+      }
 
     function listtodolist(category_name, todolist_id) {
 
@@ -45,6 +50,41 @@ function Usertodolist(props) {
     function goto() {
         router.push(`http://localhost:3000/user/todolistadd/${user_id}`)
     }
+    function gotocategory() {
+        router.push(`http://localhost:3000/user/categoryedit/${user_id}`)
+    }
+
+    function handleRemove(todolist_id) {
+        Confirm.fire({
+            title: 'Confirm!!',
+            text: "Do you want to delete todolist?",
+            icon: 'warning',
+          }).then((result) => {
+            if (result.isConfirmed) {
+              todolistdelete(props.Token,todolist_id).then((res) => {
+                Swal.fire({
+                  title: 'Deleted!!',
+                  text: res.data,
+                  icon: 'success'
+                })
+                refreshdata()
+              }).catch((err) => {
+                Swal.fire({
+                  position: 'top',
+                  title: 'Error!',
+                  text: err.response.data,
+                  icon: 'error',
+                  iconColor: 'Red',
+                  confirmButtonColor: '#3085d6',
+                  confirmButtonText: 'ตกลง'
+                })
+                console.log(err)
+              })
+            }
+          }).catch((err) => {
+            console.log(err)
+          })
+    }
     return (
         <>
             {loading == true ? (
@@ -70,9 +110,9 @@ function Usertodolist(props) {
                                         </Dropdown.Toggle>
                                         <Dropdown.Menu className="scrollable-menu" id="sss">
                                             {props.categorys.map((item, catindex) =>
-                                                <Dropdown.Item id={`category-${catindex+1}`} name={catindex+1} key={catindex} as="button" onClick={() => { setSelect(item.category_id); setDropDownText(item.category_name) }}>{item.category_name}</Dropdown.Item>
+                                                <Dropdown.Item id={`category-${catindex + 1}`} name={catindex + 1} key={catindex} as="button" onClick={() => { setSelect(item.category_id); setDropDownText(item.category_name) }}>{item.category_name}</Dropdown.Item>
                                             )}
-                                            <Dropdown.Item id="Category-ALL" as="button"  onClick={(id) => { setSelect(""); setDropDownText("ALL") }}>ALL</Dropdown.Item>
+                                            <Dropdown.Item id="Category-ALL" as="button" onClick={(id) => { setSelect(""); setDropDownText("ALL") }}>ALL</Dropdown.Item>
                                         </Dropdown.Menu>
                                     </Dropdown>
                                 </div>
@@ -90,6 +130,9 @@ function Usertodolist(props) {
                                 </div>
                                 <div className="cat-search-container-sub-2" >
                                     <button id='userdashboard-add-btn' type="button" className="button-32" onClick={goto} role="button"><AiOutlinePlus /> Add todolist</button>
+                                    &nbsp; &nbsp; &nbsp; &nbsp;         
+                                    <button id='userdashboard-add-btn' type="button" className="button-32" onClick={gotocategory} role="button"><AiFillEdit /> Category Edit</button>
+                                                
                                 </div>
                             </div>
                             <div className="usertodolist-card-content">
@@ -100,41 +143,48 @@ function Usertodolist(props) {
                                         {filterStatusList.map((item2, index2) =>
                                             item.category_id === item2.fk_category_id
                                             && (
-                                                <div id={`listname${index2 + 1}`} key={index2} onClick={() => listtodolist(item.category_name, item2.todolist_id)} className="usertodolist-list-checkbox">
-                                                    <div className="list-div">
-                                                        <h5>{item2.todolist_name}</h5>
-                                                    </div>
-                                                    <div className="list-div">
-                                                        <div className="list-div-end-con">
-                                                            <div className="list-div-end">
-                                                                {item2.todolist_status === "p"
-                                                                    ? <h5 style={{ color: "blue" }}>PENDING</h5>
-                                                                    : <h5 style={{ color: "green" }}>DONE</h5>
-                                                                }
-                                                            </div>
-                                                            <div className="list-div-end">
-                                                                {item2.todolist_status === 'p'
-                                                                    ? (
-                                                                        <>
-                                                                            {moment(item2.todolist_due).format('ll') > moment(Date.now()).format('ll')
-                                                                                ? (
-                                                                                    <h5 style={{ color: "green" }}>⌛Expired {moment(item2.todolist_due).fromNow()}</h5>
-                                                                                )
-                                                                                : (
-                                                                                    <h5 style={{ color: "red" }}>🛑Late {moment(item2.todolist_due).fromNow()}</h5>
-                                                                                )
-                                                                            }
-                                                                        </>
-                                                                    )
-                                                                    :(
-                                                                        <h5 style={{ color: "gray" }}>✔️</h5>
-                                                                    )
-                                                                }
-
-                                                            </div>
+                                                <div className="list-div-con">
+                                                    <div id={`listname${index2 + 1}`} key={index2} onClick={() => listtodolist(item.category_name, item2.todolist_id)} className="usertodolist-list-checkbox">
+                                                        <div className="list-div">
+                                                            <h5>{item2.todolist_name}</h5>
                                                         </div>
-                                                    </div>
+                                                        <div className="list-div">
+                                                            <div className="list-div-end-con">
+                                                                <div className="list-div-end">
+                                                                    {item2.todolist_status === "p"
+                                                                        ? <h5 style={{ color: "blue" }}>PENDING</h5>
+                                                                        : <h5 style={{ color: "green" }}>DONE</h5>
+                                                                    }
+                                                                </div>
+                                                                <div className="list-div-end">
+                                                                    {item2.todolist_status === 'p'
+                                                                        ? (
+                                                                            <>
+                                                                                {moment(item2.todolist_due).format('ll') > moment(Date.now()).format('ll')
+                                                                                    ? (
+                                                                                        <h5 style={{ color: "green" }}>⌛Expired {moment(item2.todolist_due).fromNow()}</h5>
+                                                                                    )
+                                                                                    : (
+                                                                                        <h5 style={{ color: "red" }}>🛑Late {moment(item2.todolist_due).fromNow()}</h5>
+                                                                                    )
+                                                                                }
+                                                                            </>
+                                                                        )
+                                                                        : (
+                                                                            <h5 style={{ color: "gray" }}>✔️</h5>
+                                                                        )
+                                                                    }
 
+                                                                </div>
+
+                                                            </div>
+
+                                                        </div>
+
+                                                    </div>
+                                                    <div className="usertodolist-list-delete">
+                                                        <button id={`delete-todolist-${index2+1}`} type="button" className="btn btn-danger"> <AiFillDelete onClick={() => handleRemove(item2.todolist_id)} /> </button>
+                                                    </div>
                                                 </div>
                                             )
                                         )
@@ -166,31 +216,32 @@ function Usertodolist(props) {
 
 export async function getServerSideProps(context) {
     var Token = await context.req.cookies.jwt_token
-    const value ={
-        Cookie:Token
+    const value = {
+        Cookie: Token
     }
     // console.log("TOKEN GETSERVERSIDE :",Token)
     const token = await requesttokens(value)
-    const verify = await token.data
+    const verify = await token.data.decode
     const { params } = context
-    const result = await listusertodolistid(Token,params.user_id)
+    const result = await listusertodolistid(Token, params.user_id)
     const user = await result.data.user
     const todolists = await result.data.todolists
     const categorys = await result.data.category
-    // if(params.user_id === verify.user_id ){
+    if (params.user_id == verify.user_id) {
         return {
             props: {
                 todolists: todolists,
                 categorys: categorys,
-                verify:verify,
-                Token:Token
+                verify: verify,
+                Token: Token,
+                user_id: params.user_id
             },
         }
-    // }
+    }
+    return {
+        notFound: true
+    };
 
-    // return {
-    //     notFound: true
-    // };
     // const verified = await result.data.verified
     // const admin = await result.data.admin
 }

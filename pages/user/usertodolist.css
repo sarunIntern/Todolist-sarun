@@ -380,6 +380,16 @@ width: 100%;
   box-shadow: 0 0 0 2px rgba(0, 0, 0, .2), 0 3px 8px 0 rgba(0, 0, 0, .15);
   display: flex;
   justify-content: flex-start;
+  width: 100%;
+}
+.usertodolist-list-delete {
+  padding: 5px;
+ 
+}
+.list-div-con{
+  display: flex;
+  width: 100%;
+  /* background-color: #23c483; */
 }
 .list-div{
   /* margin-right: 20px; */

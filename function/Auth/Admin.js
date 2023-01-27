@@ -4,7 +4,7 @@ export const changerole = async (authentoken,id,value) =>
   await axios.post(process.env.NEXT_PUBLIC_APP_APIIN + "/auth/Admin/Changerole/"+id,value,
   {
     headers: {
-      Token:authentoken
+      token:authentoken
     }
   }
   )
@@ -13,7 +13,7 @@ export const deleteuser = async (authentoken,id) =>
   await axios.delete(process.env.NEXT_PUBLIC_APP_APIIN + "/auth/Admin/Delete/"+id,
   {
     headers: {
-      Token:authentoken
+      token:authentoken
     }
   }
   )
@@ -22,7 +22,7 @@ export const deleteuser = async (authentoken,id) =>
   await axios.get(process.env.NEXT_PUBLIC_APP_API+ "/auth/User/Listtodolist/todolist",
   {
     headers: {
-      Token:authentoken
+      token:authentoken
     }
   }
   )
@@ -30,7 +30,7 @@ export const deleteuser = async (authentoken,id) =>
   await axios.get(process.env.NEXT_PUBLIC_APP_APIIN+ "/auth/Admin/Listuser",
   {
     headers: {
-      Token:authentoken
+      token:authentoken
     }
   }
   )
@@ -39,7 +39,7 @@ export const listuserID= async (authentoken,id) =>
   await axios.get(process.env.NEXT_PUBLIC_APP_API+"/auth/Admin/Listuser/"+id,
   {
     headers: {
-      Token:authentoken
+      token:authentoken
     }
   }
   );
